@@ -1,0 +1,16 @@
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\bin\Debug\net9.0\Projeto.Services.deps.json
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\bin\Debug\net9.0\Projeto.Services.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\bin\Debug\net9.0\Projeto.Services.pdb
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\bin\Debug\net9.0\Projeto.Domain.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\bin\Debug\net9.0\Projeto.Domain.pdb
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.csproj.AssemblyReference.cache
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.AssemblyInfoInputs.cache
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.AssemblyInfo.cs
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.csproj.CoreCompileInputs.cache
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.sourcelink.json
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto..A8FB9880.Up2Date
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\refint\Projeto.Services.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\Projeto.Services.pdb
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Services\obj\Debug\net9.0\ref\Projeto.Services.dll

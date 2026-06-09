@@ -1,0 +1,12 @@
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\Projeto.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\bin\Debug\net9.0\Projeto.Domain.deps.json
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\bin\Debug\net9.0\Projeto.Domain.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\bin\Debug\net9.0\Projeto.Domain.pdb
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\Projeto.Domain.AssemblyInfoInputs.cache
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\Projeto.Domain.AssemblyInfo.cs
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\Projeto.Domain.csproj.CoreCompileInputs.cache
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\Projeto.Domain.sourcelink.json
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\Projeto.Domain.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\refint\Projeto.Domain.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\Projeto.Domain.pdb
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Domain\obj\Debug\net9.0\ref\Projeto.Domain.dll
