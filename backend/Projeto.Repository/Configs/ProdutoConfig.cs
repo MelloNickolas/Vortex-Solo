@@ -24,9 +24,8 @@ public class ProdutoConfig : IEntityTypeConfiguration<Produto>
             .HasColumnType("decimal(18,2)")
             .IsRequired();
 
-        builder.Property(p => p.Ativo).HasDefaultValue(true);
-
-        // Produto sem categoria não pode existir — Restrict impede orphan records
+        // vai deletar a categoria e deixar os produtos ja cadastrado com a relação?
+        // vao ter produtos sem categoria entao...
         builder.HasOne(p => p.Categoria)
             .WithMany(c => c.Produtos)
             .HasForeignKey(p => p.CategoriaID)

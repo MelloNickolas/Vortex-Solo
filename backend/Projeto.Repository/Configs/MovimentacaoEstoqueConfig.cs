@@ -13,18 +13,19 @@ public class MovimentacaoEstoqueConfig : IEntityTypeConfiguration<MovimentacaoEs
         builder.HasKey(m => m.ID);
         builder.Property(m => m.ID).ValueGeneratedOnAdd();
 
-        // Enums armazenados como inteiro no SQLite
-        builder.Property(m => m.Tipo).HasConversion<int>().IsRequired();
-        builder.Property(m => m.Motivo).HasConversion<int>().IsRequired();
+        builder.Property(m => m.Tipo).HasConversion<string>().IsRequired(true);
+        builder.Property(m => m.Motivo).HasConversion<string>().IsRequired(true);
 
-        // Quantidade sempre positiva — a direção é definida pelo campo Tipo
-        builder.Property(m => m.Quantidade).IsRequired();
+        // quanto desse item foi movido?
+        builder.Property(m => m.Quantidade).IsRequired(true);
 
+        // Como vai ter movimentações registradas com produtos que não existem?
         builder.HasOne(m => m.Produto)
             .WithMany(p => p.Movimentacoes)
             .HasForeignKey(m => m.ProdutoID)
             .OnDelete(DeleteBehavior.Restrict);
 
+        // o mesmo vale para os ususários né.
         builder.HasOne(m => m.Usuario)
             .WithMany(u => u.Movimentacoes)
             .HasForeignKey(m => m.UsuarioID)

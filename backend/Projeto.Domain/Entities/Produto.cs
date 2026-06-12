@@ -8,8 +8,6 @@ public class Produto
     public decimal Preco { get; set; }
     public int EstoqueAtual { get; set; }
     public int EstoqueMinimo { get; set; } // vamos usar para gerar alertas e avisos
-    public bool Ativo { get; set; } = true;
-    
 
     public int CategoriaID { get; set; }
     public Categoria Categoria { get; set; } = null!;

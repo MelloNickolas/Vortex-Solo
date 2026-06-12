@@ -67,7 +67,6 @@ namespace Projeto.Repository.Migrations
                     Preco = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     EstoqueAtual = table.Column<int>(type: "INTEGER", nullable: false),
                     EstoqueMinimo = table.Column<int>(type: "INTEGER", nullable: false),
-                    Ativo = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: true),
                     CategoriaID = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -98,7 +97,7 @@ namespace Projeto.Repository.Migrations
                         column: x => x.EstadoID,
                         principalTable: "Estados",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,9 +106,9 @@ namespace Projeto.Repository.Migrations
                 {
                     ID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Tipo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Tipo = table.Column<string>(type: "TEXT", nullable: false),
                     Quantidade = table.Column<int>(type: "INTEGER", nullable: false),
-                    Motivo = table.Column<int>(type: "INTEGER", nullable: false),
+                    Motivo = table.Column<string>(type: "TEXT", nullable: false),
                     DataMovimento = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ProdutoID = table.Column<int>(type: "INTEGER", nullable: false),
                     UsuarioID = table.Column<int>(type: "INTEGER", nullable: false)
@@ -154,7 +153,7 @@ namespace Projeto.Repository.Migrations
                         column: x => x.CidadeID,
                         principalTable: "Cidades",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -165,9 +164,9 @@ namespace Projeto.Repository.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     DataVenda = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<int>(type: "INTEGER", nullable: false),
-                    FormaPagamento = table.Column<int>(type: "INTEGER", nullable: false),
-                    TipoPagamento = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
+                    FormaPagamento = table.Column<string>(type: "TEXT", nullable: false),
+                    TipoPagamento = table.Column<string>(type: "TEXT", nullable: false),
                     NumeroParcelas = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1),
                     ClienteID = table.Column<int>(type: "INTEGER", nullable: false),
                     UsuarioID = table.Column<int>(type: "INTEGER", nullable: false)

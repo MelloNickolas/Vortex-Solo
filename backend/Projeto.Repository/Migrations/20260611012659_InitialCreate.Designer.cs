@@ -11,7 +11,7 @@ using Projeto.Repository.Context;
 namespace Projeto.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260609015431_InitialCreate")]
+    [Migration("20260611012659_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -168,8 +168,9 @@ namespace Projeto.Repository.Migrations
                     b.Property<DateTime>("DataMovimento")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Motivo")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Motivo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("ProdutoID")
                         .HasColumnType("INTEGER");
@@ -177,8 +178,9 @@ namespace Projeto.Repository.Migrations
                     b.Property<int>("Quantidade")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("Tipo")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("UsuarioID")
                         .HasColumnType("INTEGER");
@@ -197,11 +199,6 @@ namespace Projeto.Repository.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(true);
 
                     b.Property<int>("CategoriaID")
                         .HasColumnType("INTEGER");
@@ -285,19 +282,22 @@ namespace Projeto.Repository.Migrations
                     b.Property<DateTime>("DataVenda")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("FormaPagamento")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("FormaPagamento")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("NumeroParcelas")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER")
                         .HasDefaultValue(1);
 
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("TipoPagamento")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("TipoPagamento")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("UsuarioID")
                         .HasColumnType("INTEGER");
@@ -319,7 +319,7 @@ namespace Projeto.Repository.Migrations
                     b.HasOne("Projeto.Domain.Entities.Estado", "Estado")
                         .WithMany("Cidades")
                         .HasForeignKey("EstadoID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Estado");
@@ -330,7 +330,7 @@ namespace Projeto.Repository.Migrations
                     b.HasOne("Projeto.Domain.Entities.Cidade", "Cidade")
                         .WithMany("Clientes")
                         .HasForeignKey("CidadeID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cidade");

@@ -10,116 +10,70 @@ public class ProdutoRepository : BaseRepository, IProdutoRepository
     public ProdutoRepository(AppDbContext context) : base(context) { }
 
     public async Task<(IEnumerable<Produto> Items, int Total)> GetPagedAsync(
-        int page, int pageSize, string? nome, int? categoriaId, bool? ativo)
+        int page, int pageSize, string? nome, int? categoriaId)
     {
-        try
-        {
-            var query = _context.Produtos
-                .Include(p => p.Categoria)
-                .AsQueryable();
+        // imagina que voce abriu um armário, mas nao pegou nada ainda, só abriu a porta.
+        var query = _context.Produtos
+            .Include(p => p.Categoria)
+            .AsQueryable(); // aqui ele siginifica que nada foi executado no banco, é só uma receita
 
-            if (!string.IsNullOrWhiteSpace(nome))
-                query = query.Where(p => p.Nome.ToLower().Contains(nome.ToLower()));
+        // aqui psasamos os filtros opcionais....
+        if (!string.IsNullOrWhiteSpace(nome))
+            query = query.Where(p => p.Nome.ToLower().Contains(nome.ToLower()));
+        if (categoriaId.HasValue)
+            query = query.Where(p => p.CategoriaID == categoriaId.Value);
 
-            if (categoriaId.HasValue)
-                query = query.Where(p => p.CategoriaID == categoriaId.Value);
+        // sele vai contar depois de tudo quantos produtos tem ao todo, ai o nosso front-end só usa esse numero .
+        var total = await query.CountAsync();
 
-            if (ativo.HasValue)
-                query = query.Where(p => p.Ativo == ativo.Value);
+        
+        var items = await query
+            // primeiro ordenamos cada produto por ordem alfabetica.
+            .OrderBy(p => p.Nome) 
+            /* A fórmula (page - 1) * pageSize calcula exatamente quantos pular para chegar na página certa. 
+            vamos supor que a pageSize é 10, e o front quer a page 2, o cálculo vai ficar assim:
+            (2 - 1) * 10 = 10 ----- ou seja, ele vai pular os 10 primeiros registros. */
+            .Skip((page - 1) * pageSize)
+            // vai pegar os 10 itens depois de pular.
+            .Take(pageSize)
+            .ToListAsync();
 
-            var total = await query.CountAsync();
-
-            var items = await query
-                .OrderBy(p => p.Nome)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-
-            return (items, total);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao listar produtos: {ex.Message}");
-        }
+        return (items, total);
     }
 
     public async Task<Produto?> GetByIdAsync(int id)
     {
-        try
-        {
-            return await _context.Produtos
-                .Include(p => p.Categoria)
-                .FirstOrDefaultAsync(p => p.ID == id);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao buscar produto {id}: {ex.Message}");
-        }
+        return await _context.Produtos
+            .Include(p => p.Categoria)
+            .FirstOrDefaultAsync(p => p.ID == id);
     }
 
     // Utilizado no Dashboard para exibir alertas de estoque crítico
     public async Task<IEnumerable<Produto>> GetAbaixoDoEstoqueMinimoAsync()
     {
-        try
-        {
-            return await _context.Produtos
-                .Include(p => p.Categoria)
-                .Where(p => p.Ativo && p.EstoqueAtual <= p.EstoqueMinimo)
-                .OrderBy(p => p.EstoqueAtual)
-                .ToListAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao buscar produtos com estoque crítico: {ex.Message}");
-        }
+        return await _context.Produtos
+            .Include(p => p.Categoria)
+            .Where(p => p.EstoqueAtual <= p.EstoqueMinimo)
+            .OrderBy(p => p.EstoqueAtual)
+            .ToListAsync();
     }
 
     public async Task<Produto> AddAsync(Produto produto)
     {
-        try
-        {
-            await _context.Produtos.AddAsync(produto);
-            await _context.SaveChangesAsync();
-            return produto;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao cadastrar produto: {ex.Message}");
-        }
+        await _context.Produtos.AddAsync(produto);
+        await _context.SaveChangesAsync();
+        return produto;
     }
 
     public async Task UpdateAsync(Produto produto)
     {
-        try
-        {
-            _context.Produtos.Update(produto);
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao atualizar produto: {ex.Message}");
-        }
+        _context.Produtos.Update(produto);
+        await _context.SaveChangesAsync();
     }
 
-    // Soft delete — mantém histórico de vendas e movimentações intacto
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(Produto produto)
     {
-        try
-        {
-            var produto = await _context.Produtos.FirstOrDefaultAsync(p => p.ID == id)
-                ?? throw new KeyNotFoundException($"Produto {id} não encontrado.");
-
-            produto.Ativo = false;
-            _context.Produtos.Update(produto);
-            await _context.SaveChangesAsync();
-        }
-        catch (KeyNotFoundException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao desativar produto: {ex.Message}");
-        }
+        _context.Produtos.Remove(produto);
+        await _context.SaveChangesAsync();
     }
 }

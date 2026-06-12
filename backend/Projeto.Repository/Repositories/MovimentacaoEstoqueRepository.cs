@@ -13,52 +13,39 @@ public class MovimentacaoEstoqueRepository : BaseRepository, IMovimentacaoEstoqu
     public async Task<(IEnumerable<MovimentacaoEstoque> Items, int Total)> GetPagedAsync(
         int page, int pageSize, int? produtoId, TipoMovimentacao? tipo, DateTime? de, DateTime? ate)
     {
-        try
-        {
-            var query = _context.MovimentacoesEstoque
-                .Include(m => m.Produto)
-                .Include(m => m.Usuario)
-                .AsQueryable();
+        var query = _context.MovimentacoesEstoque
+            // Aqui usamos 2 include pq nao precisamos buscar um usuario dentro do produto, aqui colocariamos then se ffossemos buscar categoria, sacou?
+            .Include(m => m.Produto)
+            .Include(m => m.Usuario)
+            .AsQueryable(); // ele basicamente faz voce aceitar WHERE e ORDERBY depois de buscar.
 
-            if (produtoId.HasValue)
-                query = query.Where(m => m.ProdutoID == produtoId.Value);
+        if (produtoId.HasValue)
+            query = query.Where(m => m.ProdutoID == produtoId.Value);
 
-            if (tipo.HasValue)
-                query = query.Where(m => m.Tipo == tipo.Value);
+        if (tipo.HasValue)
+            query = query.Where(m => m.Tipo == tipo.Value);
 
-            if (de.HasValue)
-                query = query.Where(m => m.DataMovimento >= de.Value);
+        if (de.HasValue)
+            query = query.Where(m => m.DataMovimento >= de.Value);
 
-            if (ate.HasValue)
-                query = query.Where(m => m.DataMovimento <= ate.Value);
+        if (ate.HasValue)
+            query = query.Where(m => m.DataMovimento <= ate.Value);
 
-            var total = await query.CountAsync();
+        var total = await query.CountAsync();
 
-            var items = await query
-                .OrderByDescending(m => m.DataMovimento)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+        var items = await query
+            .OrderByDescending(m => m.DataMovimento)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
 
-            return (items, total);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao listar movimentações: {ex.Message}");
-        }
+        return (items, total);
     }
 
     public async Task<MovimentacaoEstoque> AddAsync(MovimentacaoEstoque movimentacao)
     {
-        try
-        {
-            await _context.MovimentacoesEstoque.AddAsync(movimentacao);
-            await _context.SaveChangesAsync();
-            return movimentacao;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao registrar movimentação: {ex.Message}");
-        }
+        await _context.MovimentacoesEstoque.AddAsync(movimentacao);
+        await _context.SaveChangesAsync();
+        return movimentacao;
     }
 }

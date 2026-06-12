@@ -9,5 +9,5 @@ public interface ICategoriaRepository
     Task<IEnumerable<Categoria>> SearchByNameAsync(string nome);
     Task<Categoria> AddAsync(Categoria categoria);
     Task UpdateAsync(Categoria categoria);
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Categoria categoria);
 }

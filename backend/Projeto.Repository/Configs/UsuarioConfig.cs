@@ -17,17 +17,15 @@ public class UsuarioConfig : IEntityTypeConfiguration<Usuario>
             .HasMaxLength(150)
             .IsRequired();
 
-        // E-mail único — utilizado como login no sistema
+        // E-mail único
         builder.Property(u => u.Email)
             .HasMaxLength(200)
             .IsRequired();
         builder.HasIndex(u => u.Email).IsUnique();
 
-        // Hash BCrypt — nunca deve ser exposto nas respostas da API
+        // Hash BCrypt
         builder.Property(u => u.SenhaHash).IsRequired();
-
         builder.Property(u => u.Telefone).HasMaxLength(20);
-
         builder.Property(u => u.Ativo).HasDefaultValue(true);
     }
 }

@@ -9,5 +9,5 @@ public interface IClienteRepository
     Task<Cliente?> GetByCpfAsync(string cpf);
     Task<Cliente> AddAsync(Cliente cliente);
     Task UpdateAsync(Cliente cliente);
-    Task DeleteAsync(int id);
+    Task DeleteAsync(Cliente cliente);
 }

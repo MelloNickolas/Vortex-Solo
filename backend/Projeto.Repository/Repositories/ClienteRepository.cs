@@ -12,111 +12,69 @@ public class ClienteRepository : BaseRepository, IClienteRepository
     public async Task<(IEnumerable<Cliente> Items, int Total)> GetPagedAsync(
         int page, int pageSize, string? busca, bool? ativo)
     {
-        try
-        {
-            var query = _context.Clientes
-                .Include(c => c.Cidade)
-                    .ThenInclude(ci => ci.Estado)
-                .AsQueryable();
+        var query = _context.Clientes
+            /* aqui colocamos include, ele serve como um JOIN no SQL, ele vai carregar tudo junto, em vez de fazer 2 viagens*/
+            .Include(c => c.Cidade)
+                /* Aqui é um Include encadeado */
+                .ThenInclude(ci => ci.Estado)
+            .AsQueryable(); // ele basicamente ffaza voce aceitar WHERE e ORDERBY depois de buscar.
 
-            // Filtro unificado: busca por nome OU CPF
-            if (!string.IsNullOrWhiteSpace(busca))
-                query = query.Where(c =>
-                    c.Nome.ToLower().Contains(busca.ToLower()) ||
-                    c.CPF.Contains(busca));
+        // Filtro unificado, busca por nome OU CPF
+        if (!string.IsNullOrWhiteSpace(busca))
+            query = query.Where(c =>
+                c.Nome.ToLower().Contains(busca.ToLower()) ||
+                c.CPF.Contains(busca));
 
-            if (ativo.HasValue)
-                query = query.Where(c => c.Ativo == ativo.Value);
+        if (ativo.HasValue)
+            query = query.Where(c => c.Ativo == ativo.Value);
 
-            var total = await query.CountAsync();
 
-            var items = await query
-                .OrderBy(c => c.Nome)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+        // ele vai contar depois de tudo quantos produtos tem ao todo, ai o nosso front-end só usa esse numero .
+        var total = await query.CountAsync();
 
-            return (items, total);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao listar clientes: {ex.Message}");
-        }
+        var items = await query
+            // primeiro ordenamos cada produto por ordem alfabetica.
+            .OrderBy(c => c.Nome)
+            /* A fórmula (page - 1) * pageSize calcula exatamente quantos pular para chegar na página certa. 
+            vamos supor que a pageSize é 10, e o front quer a page 2, o cálculo vai ficar assim:
+            (2 - 1) * 10 = 10 ----- ou seja, ele vai pular os 10 primeiros registros. */
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (items, total);
     }
 
     public async Task<Cliente?> GetByIdAsync(int id)
     {
-        try
-        {
-            return await _context.Clientes
-                .Include(c => c.Cidade)
-                    .ThenInclude(ci => ci.Estado)
-                .FirstOrDefaultAsync(c => c.ID == id);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao buscar cliente {id}: {ex.Message}");
-        }
+        return await _context.Clientes
+            .Include(c => c.Cidade)
+                .ThenInclude(ci => ci.Estado)
+            .FirstOrDefaultAsync(c => c.ID == id);
     }
 
     public async Task<Cliente?> GetByCpfAsync(string cpf)
     {
-        try
-        {
-            return await _context.Clientes.FirstOrDefaultAsync(c => c.CPF == cpf);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao buscar cliente por CPF: {ex.Message}");
-        }
+        return await _context.Clientes.FirstOrDefaultAsync(c => c.CPF == cpf);
     }
 
     public async Task<Cliente> AddAsync(Cliente cliente)
     {
-        try
-        {
-            await _context.Clientes.AddAsync(cliente);
-            await _context.SaveChangesAsync();
-            return cliente;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao cadastrar cliente: {ex.Message}");
-        }
+        await _context.Clientes.AddAsync(cliente);
+        await _context.SaveChangesAsync();
+        return cliente;
     }
 
     public async Task UpdateAsync(Cliente cliente)
     {
-        try
-        {
-            _context.Clientes.Update(cliente);
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao atualizar cliente: {ex.Message}");
-        }
+        _context.Clientes.Update(cliente);
+        await _context.SaveChangesAsync();
     }
-
-    // Soft delete — mantém histórico de vendas do cliente intacto
-    public async Task DeleteAsync(int id)
+    
+    public async Task DeleteAsync(Cliente cliente)
     {
-        try
-        {
-            var cliente = await _context.Clientes.FirstOrDefaultAsync(c => c.ID == id)
-                ?? throw new KeyNotFoundException($"Cliente {id} não encontrado.");
-
-            cliente.Ativo = false;
-            _context.Clientes.Update(cliente);
-            await _context.SaveChangesAsync();
-        }
-        catch (KeyNotFoundException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao desativar cliente: {ex.Message}");
-        }
+        cliente.Ativo = false;
+        _context.Clientes.Update(cliente);
+        await _context.SaveChangesAsync();
     }
 }

@@ -17,10 +17,8 @@ public class CidadeConfig : IEntityTypeConfiguration<Cidade>
             .HasMaxLength(150)
             .IsRequired();
 
-        // Cidade pertence a um Estado — sem cascade delete para proteger o histórico
         builder.HasOne(c => c.Estado)
             .WithMany(e => e.Cidades)
-            .HasForeignKey(c => c.EstadoID)
-            .OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(c => c.EstadoID);
     }
 }

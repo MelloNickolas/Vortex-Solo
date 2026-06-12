@@ -11,89 +11,41 @@ public class CategoriaRepository : BaseRepository, ICategoriaRepository
 
     public async Task<IEnumerable<Categoria>> GetAllAsync()
     {
-        try
-        {
-            return await _context.Categorias
-                .OrderBy(c => c.Nome)
-                .ToListAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao listar categorias: {ex.Message}");
-        }
+        return await _context.Categorias
+            .OrderBy(c => c.Nome)
+            .ToListAsync();
     }
 
     public async Task<Categoria?> GetByIdAsync(int id)
     {
-        try
-        {
-            return await _context.Categorias.FirstOrDefaultAsync(c => c.ID == id);
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao buscar categoria {id}: {ex.Message}");
-        }
+        return await _context.Categorias.FirstOrDefaultAsync(c => c.ID == id);
     }
 
     public async Task<IEnumerable<Categoria>> SearchByNameAsync(string nome)
     {
-        try
-        {
-            return await _context.Categorias
-                .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
-                .OrderBy(c => c.Nome)
-                .ToListAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao buscar categorias por nome: {ex.Message}");
-        }
+        return await _context.Categorias
+            .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
+            .OrderBy(c => c.Nome)
+            .ToListAsync();
     }
 
     public async Task<Categoria> AddAsync(Categoria categoria)
     {
-        try
-        {
-            await _context.Categorias.AddAsync(categoria);
-            await _context.SaveChangesAsync();
-            return categoria;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao cadastrar categoria: {ex.Message}");
-        }
+        await _context.Categorias.AddAsync(categoria);
+        await _context.SaveChangesAsync();
+        return categoria;
     }
 
     public async Task UpdateAsync(Categoria categoria)
     {
-        try
-        {
-            _context.Categorias.Update(categoria);
-            await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao atualizar categoria: {ex.Message}");
-        }
+        _context.Categorias.Update(categoria);
+        await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    // Delete físico — Application busca o objeto, valida e passa aqui já resolvido
+    public async Task DeleteAsync(Categoria categoria)
     {
-        try
-        {
-            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.ID == id)
-                ?? throw new KeyNotFoundException($"Categoria {id} não encontrada.");
-
-            _context.Categorias.Remove(categoria);
-            await _context.SaveChangesAsync();
-        }
-        catch (KeyNotFoundException)
-        {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Erro ao deletar categoria: {ex.Message}");
-        }
+        _context.Categorias.Remove(categoria);
+        await _context.SaveChangesAsync();
     }
 }

@@ -17,7 +17,6 @@ public class EstadoConfig : IEntityTypeConfiguration<Estado>
             .HasMaxLength(100)
             .IsRequired();
 
-        // Sigla de dois caracteres (ex: "SP", "RJ")
         builder.Property(e => e.UF)
             .HasMaxLength(2)
             .IsRequired();
