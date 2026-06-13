@@ -166,8 +166,6 @@ namespace Projeto.Repository.Migrations
                     ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "TEXT", nullable: false),
                     FormaPagamento = table.Column<string>(type: "TEXT", nullable: false),
-                    TipoPagamento = table.Column<string>(type: "TEXT", nullable: false),
-                    NumeroParcelas = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1),
                     ClienteID = table.Column<int>(type: "INTEGER", nullable: false),
                     UsuarioID = table.Column<int>(type: "INTEGER", nullable: false)
                 },

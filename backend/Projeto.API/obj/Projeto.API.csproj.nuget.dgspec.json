@@ -58,6 +58,10 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.7, )"
@@ -123,6 +127,9 @@
               },
               "C:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Repository\\Projeto.Repository.csproj": {
                 "projectPath": "C:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Repository\\Projeto.Repository.csproj"
+              },
+              "C:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\Projeto.Services.csproj": {
+                "projectPath": "C:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\Projeto.Services.csproj"
               }
             }
           }

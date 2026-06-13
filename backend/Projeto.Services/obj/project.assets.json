@@ -385,11 +385,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\Projeto.Services.csproj",
+      "projectUniqueName": "c:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\Projeto.Services.csproj",
       "projectName": "Projeto.Services",
-      "projectPath": "C:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\Projeto.Services.csproj",
+      "projectPath": "c:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\Projeto.Services.csproj",
       "packagesPath": "C:\\Users\\nicko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\obj\\",
+      "outputPath": "c:\\Users\\nicko\\Documents\\GitHub\\Vortex-Solo\\backend\\Projeto.Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\nicko\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -283,16 +283,7 @@ namespace Projeto.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NumeroParcelas")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(1);
-
                     b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TipoPagamento")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

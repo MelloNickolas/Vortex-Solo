@@ -16,3 +16,5 @@ C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Application\obj\Debu
 C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Application\obj\Debug\net9.0\refint\Projeto.Application.dll
 C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Application\obj\Debug\net9.0\Projeto.Application.pdb
 C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Application\obj\Debug\net9.0\ref\Projeto.Application.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Application\bin\Debug\net9.0\Projeto.Services.dll
+C:\Users\nicko\Documents\GitHub\Vortex-Solo\backend\Projeto.Application\bin\Debug\net9.0\Projeto.Services.pdb

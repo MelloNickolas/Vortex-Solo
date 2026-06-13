@@ -1337,7 +1337,8 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Projeto.Domain": "1.0.0",
-          "Projeto.Repository": "1.0.0"
+          "Projeto.Repository": "1.0.0",
+          "Projeto.Services": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Projeto.Application.dll": {}
@@ -3974,6 +3975,7 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "BCrypt.Net-Next >= 4.0.3",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.5",
       "Microsoft.AspNetCore.OpenApi >= 9.0.7",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.5",
       "Projeto.Application >= 1.0.0",
@@ -4038,6 +4040,10 @@
           "BCrypt.Net-Next": {
             "target": "Package",
             "version": "[4.0.3, )"
+          },
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[9.0.5, )"
           },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",

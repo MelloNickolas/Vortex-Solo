@@ -18,7 +18,7 @@ public class AppDbContext : DbContext
     public DbSet<MovimentacaoEstoque> MovimentacoesEstoque { get; set; }
     #endregion
 
-    private readonly DbContextOptions _options;
+    private readonly DbContextOptions? _options;
 
     public AppDbContext() { }
 

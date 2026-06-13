@@ -1,0 +1,24 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# SQLite
+*.db
+*.db-shm
+*.db-wal
+
+# Secrets
+appsettings.Production.json
+
+# Node / Frontend
+node_modules/
+dist/
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

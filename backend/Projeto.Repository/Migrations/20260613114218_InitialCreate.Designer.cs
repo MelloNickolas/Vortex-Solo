@@ -11,7 +11,7 @@ using Projeto.Repository.Context;
 namespace Projeto.Repository.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260611012659_InitialCreate")]
+    [Migration("20260613114218_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -286,16 +286,7 @@ namespace Projeto.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("NumeroParcelas")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasDefaultValue(1);
-
                     b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TipoPagamento")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
