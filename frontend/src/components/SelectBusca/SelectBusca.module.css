@@ -1,0 +1,101 @@
+.wrapper {
+  position: relative; /* necessário para a lista ficar posicionada abaixo do campo */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Campo principal clicável */
+.campo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  cursor: pointer;
+  min-height: 38px;
+}
+
+.campo:hover {
+  border-color: var(--accent);
+}
+
+/* Input de busca dentro do campo */
+.input {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 14px;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Texto da opção selecionada */
+.selecionado {
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+/* Placeholder quando nada está selecionado */
+.placeholder {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* Seta do dropdown */
+.seta {
+  color: var(--text-muted);
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+/* Lista de opções */
+.lista {
+  position: absolute;
+  top: calc(100% + 4px); /* aparece logo abaixo do campo */
+  left: 0;
+  right: 0;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  z-index: 50; /* fica na frente de outros elementos */
+  max-height: 200px;
+  overflow-y: auto; /* scroll se tiver muitas opções */
+}
+
+/* Cada opção da lista */
+.opcao {
+  padding: 9px 12px;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.opcao:hover {
+  background-color: var(--bg-secondary);
+}
+
+/* Opção atualmente selecionada */
+.ativo {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Mensagem quando não há resultados */
+.vazio {
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}

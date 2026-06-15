@@ -11,4 +11,5 @@ public interface IClienteApplication
     Task<ClienteResponse> CriarAsync(ClienteRequest request);
     Task<ClienteResponse> AtualizarAsync(int id, ClienteRequest request);
     Task DeletarAsync(int id);
+    Task<ClienteResponse> ReativarAsync(int id);
 }

@@ -1,0 +1,125 @@
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.btnNovo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--accent);
+  color: #fff;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.btnNovo:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Filtros lado a lado */
+.filtros {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filtros > * {
+  flex: 1;
+  max-width: 280px;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-card);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.tabela th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela td {
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela tbody tr:hover {
+  background-color: var(--bg-secondary);
+}
+
+.vazio {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 32px !important;
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btnEditar {
+  background: none;
+  color: var(--accent);
+  padding: 4px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.btnEditar:hover {
+  opacity: 0.7;
+}
+
+.btnDeletar {
+  background: none;
+  color: var(--danger);
+  padding: 4px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.btnDeletar:hover {
+  opacity: 0.7;
+}
+
+.erro {
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.btnSalvar {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 20px;
+  transition: background 0.15s;
+}
+
+.btnSalvar:hover {
+  background-color: var(--accent-hover);
+}

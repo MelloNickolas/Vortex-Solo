@@ -56,4 +56,11 @@ public class ClienteController : ControllerBase
         await _clienteApplication.DeletarAsync(id);
         return NoContent();
     }
+
+    [HttpPatch("{id}/reativar")]
+    public async Task<IActionResult> Reativar(int id)
+    {
+        var response = await _clienteApplication.ReativarAsync(id);
+        return Ok(response);
+    }
 }

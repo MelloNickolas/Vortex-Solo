@@ -1,11 +1,10 @@
 import './App.css';
+import AppRoutes from './routes/AppRoutes';
 
+// App é o ponto de entrada da aplicação
+// Ele só renderiza o AppRoutes, que cuida de todas as rotas
 function App() {
-  return (
-    <div>
-      <h1>Vortex</h1>
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;

@@ -1,0 +1,115 @@
+/* Ocupa a tela toda e centraliza o card */
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--bg-primary);
+}
+
+/* Card central com o formulário */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Nome do sistema */
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* Container dos botões Login eCadastro */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+/* Botão inativo */
+.tab {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  border: 1px solid var(--border);
+}
+
+/* Botão ativo da aba selecionada */
+.tabAtivo {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  border: 1px solid var(--accent);
+}
+
+/* Formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cada campo com label em cima */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.campo input {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: var(--text-primary);
+}
+
+.campo input:focus {
+  border-color: var(--accent);
+}
+
+.campo input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Botão principal de submit */
+.btnPrimario {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 4px;
+  transition: background 0.15s;
+}
+
+.btnPrimario:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Mensagem de erro ou sucesso */
+.mensagem {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--danger);
+}

@@ -165,6 +165,25 @@ public class ClienteApplication : IClienteApplication
         }
     }
 
+    public async Task<ClienteResponse> ReativarAsync(int id)
+    {
+        try
+        {
+            var cliente = await ValidarClienteExistente(id);
+            cliente.Ativo = true;
+            await _clienteRepository.UpdateAsync(cliente);
+            return MapearResponse(cliente);
+        }
+        catch (NotFoundException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao reativar cliente: {ex.Message}");
+        }
+    }
+
     #region Úteis
 
     private static void ValidarRequest(ClienteRequest request)
