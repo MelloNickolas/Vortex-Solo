@@ -1,9 +1,11 @@
 import { HTTPClient } from './client';
 
 const UsuarioApi = {
-    async ListarAsync() {
+    // params = { page, pageSize, busca, ativo }
+    // Retorna { data: [...], total, page, pageSize }
+    async ListarAsync(params = {}) {
         try {
-            const response = await HTTPClient.get('/usuario');
+            const response = await HTTPClient.get('/usuario', { params });
             return response.data;
         } catch (error) {
             console.error('Erro ao listar usuários:', error);
@@ -60,6 +62,16 @@ const UsuarioApi = {
             return response.data;
         } catch (error) {
             console.error('Erro ao deletar usuário:', error);
+            throw error;
+        }
+    },
+
+    async ReativarAsync(id) {
+        try {
+            const response = await HTTPClient.patch(`/usuario/${id}/reativar`);
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao reativar usuário:', error);
             throw error;
         }
     },

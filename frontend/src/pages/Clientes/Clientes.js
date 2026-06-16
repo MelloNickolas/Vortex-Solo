@@ -246,7 +246,7 @@ function Clientes() {
                 <td>{cliente.telefone}</td>
                 <td>{cliente.cidadeNome}</td>
                 <td>
-                  {/* Badge colorido conforme o status */}
+                  {/* colore o status conforme se estiver ativo, ou nao */}
                   <span className={cliente.ativo ? styles.ativo : styles.inativo}>
                     {cliente.ativo ? 'Ativo' : 'Inativo'}
                   </span>

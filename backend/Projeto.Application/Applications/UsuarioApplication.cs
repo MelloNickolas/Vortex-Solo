@@ -1,3 +1,4 @@
+using Projeto.Application.Common;
 using Projeto.Application.DTOs.Usuarios.Request;
 using Projeto.Application.DTOs.Usuarios.Response;
 using Projeto.Application.Exceptions;
@@ -19,12 +20,19 @@ public class UsuarioApplication : IUsuarioApplication
         _bcryptService     = bcryptService;
     }
 
-    public async Task<List<UsuarioResponse>> ListarAsync()
+    public async Task<PagedResponse<UsuarioResponse>> ListarAsync(int page, int pageSize, string? busca, bool? ativo)
     {
         try
         {
-            var usuarios = await _usuarioRepository.GetAllAsync();
-            return usuarios.Select(u => MapearResponse(u)).ToList();
+            var (items, total) = await _usuarioRepository.GetPagedAsync(page, pageSize, busca, ativo);
+
+            return new PagedResponse<UsuarioResponse>
+            {
+                Data     = items.Select(u => MapearResponse(u)).ToList(),
+                Total    = total,
+                Page     = page,
+                PageSize = pageSize
+            };
         }
         catch (Exception ex)
         {
@@ -163,6 +171,25 @@ public class UsuarioApplication : IUsuarioApplication
         catch (Exception ex)
         {
             throw new Exception($"Erro ao deletar usuário: {ex.Message}");
+        }
+    }
+
+    public async Task<UsuarioResponse> ReativarAsync(int id)
+    {
+        try
+        {
+            var usuario = await ValidarUsuarioExistente(id);
+            usuario.Ativo = true;
+            await _usuarioRepository.UpdateAsync(usuario);
+            return MapearResponse(usuario);
+        }
+        catch (NotFoundException)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Erro ao reativar usuário: {ex.Message}");
         }
     }
 

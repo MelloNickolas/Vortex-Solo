@@ -9,11 +9,31 @@ public class UsuarioRepository : BaseRepository, IUsuarioRepository
 {
     public UsuarioRepository(AppDbContext context) : base(context) { }
 
-    public async Task<IEnumerable<Usuario>> GetAllAsync()
+    public async Task<(IEnumerable<Usuario> Items, int Total)> GetPagedAsync(
+        int page, int pageSize, string? busca, bool? ativo)
     {
-        return await _context.Usuarios
+        var query = _context.Usuarios.AsQueryable();
+
+        // Filtra por nome OU email (os dois campos que fazem sentido buscar em usuário)
+        if (!string.IsNullOrWhiteSpace(busca))
+            query = query.Where(u =>
+                u.Nome.ToLower().Contains(busca.ToLower()) ||
+                u.Email.ToLower().Contains(busca.ToLower()));
+
+        // Filtra por status ativo/inativo se enviado
+        if (ativo.HasValue)
+            query = query.Where(u => u.Ativo == ativo.Value);
+
+        // Conta o total com os filtros aplicados (antes de paginar)
+        var total = await query.CountAsync();
+
+        var items = await query
             .OrderBy(u => u.Nome)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
+
+        return (items, total);
     }
 
     public async Task<Usuario?> GetByIdAsync(int id)

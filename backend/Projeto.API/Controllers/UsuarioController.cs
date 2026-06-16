@@ -18,9 +18,14 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Listar()
+    public async Task<IActionResult> Listar(
+        // Parâmetros opcionais que vêm na query string: /api/usuario?page=1&pageSize=10&busca=ana&ativo=true
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? busca = null,
+        [FromQuery] bool? ativo = null)
     {
-        var response = await _usuarioApplication.ListarAsync();
+        var response = await _usuarioApplication.ListarAsync(page, pageSize, busca, ativo);
         return Ok(response);
     }
 
@@ -59,5 +64,12 @@ public class UsuarioController : ControllerBase
     {
         await _usuarioApplication.DeletarAsync(id);
         return NoContent();
+    }
+
+    [HttpPatch("{id}/reativar")]
+    public async Task<IActionResult> Reativar(int id)
+    {
+        var response = await _usuarioApplication.ReativarAsync(id);
+        return Ok(response);
     }
 }
