@@ -108,7 +108,7 @@ function Usuarios() {
 
     try {
       if (usuarioEditando) {
-        // Na edição não envia senha — alterada pelo modal de alterar senha
+        // Na edição não envia senha, alterada pelo modal de alterar senha
         await UsuarioApi.AtualizarAsync(usuarioEditando.id, {
           Nome: nome,
           Email: email,
@@ -248,7 +248,7 @@ function Usuarios() {
             <Input label="Nome" value={nome} onChange={(e) => setNome(e.target.value)} placeholder="Nome completo" required />
             <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@exemplo.com" required />
             <Input label="Telefone" value={telefone} onChange={(e) => setTelefone(e.target.value)} placeholder="(11) 99999-9999" required />
-            {/* Campo senha só aparece na criação — na edição usa modal de alterar senha */}
+            {/* Campo senha só aparece na criação, na edição usa modal de alterar senha */}
             {!usuarioEditando && (
               <Input label="Senha" type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Mínimo 6 caracteres" required />
             )}

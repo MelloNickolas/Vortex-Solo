@@ -20,8 +20,8 @@ public class ProdutoController : ControllerBase
     // GET /api/produto?page=1&pageSize=10&nome=notebook&categoriaId=2
     [HttpGet]
     public async Task<IActionResult> Listar(
-        [FromQuery] int page = 1, //  se  nao vier na url usa 1
-        [FromQuery] int pageSize = 10, //  se nao vier na url usa 10
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
         [FromQuery] string? nome = null,
         [FromQuery] int? categoriaId = null)
     {

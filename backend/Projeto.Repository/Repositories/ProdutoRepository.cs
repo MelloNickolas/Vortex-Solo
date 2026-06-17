@@ -17,7 +17,7 @@ public class ProdutoRepository : BaseRepository, IProdutoRepository
             .Include(p => p.Categoria)
             .AsQueryable(); // aqui ele siginifica que nada foi executado no banco, é só uma receita
 
-        // aqui psasamos os filtros opcionais....
+        // aqui passamos os filtros opcionais....
         if (!string.IsNullOrWhiteSpace(nome))
             query = query.Where(p => p.Nome.ToLower().Contains(nome.ToLower()));
         if (categoriaId.HasValue)

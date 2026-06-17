@@ -1,0 +1,280 @@
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.btnNovo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--accent);
+  color: #fff;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.btnNovo:hover {
+  background-color: var(--accent-hover);
+}
+
+/* Filtros: status + datas lado a lado */
+.filtros {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filtroStatus {
+  min-width: 200px;
+}
+
+.filtroData {
+  min-width: 160px;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--bg-card);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.tabela th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela td {
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.tabela tbody tr:hover {
+  background-color: var(--bg-secondary);
+}
+
+.vazio {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 32px !important;
+}
+
+/* Badges de status */
+.statusPendente {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.statusConcluida {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: var(--success);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.statusCancelada {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+}
+
+.btnVer {
+  background: none;
+  color: var(--accent);
+  padding: 4px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.btnVer:hover { opacity: 0.7; }
+
+.btnCancelar {
+  background: none;
+  color: var(--danger);
+  padding: 4px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.btnCancelar:hover { opacity: 0.7; }
+
+/* --- Modal Nova Venda --- */
+
+
+.secaoItens {
+  margin-top: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+.tituloItens {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* Linha de adicionar item: produto + quantidade + botão */
+.adicionarItem {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.selectProduto {
+  flex: 1;
+}
+
+.btnAdicionarItem {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.btnAdicionarItem:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.btnAdicionarItem:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Tabela de itens dentro do modal */
+.tabelaItens {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.tabelaItens th {
+  text-align: left;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabelaItens td {
+  padding: 8px 10px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabelaItens tr:last-child td {
+  border-bottom: none;
+}
+
+.btnRemoverItem {
+  background: none;
+  color: var(--danger);
+  padding: 2px;
+  transition: opacity 0.15s;
+}
+
+.btnRemoverItem:hover { opacity: 0.7; }
+
+.totalVenda {
+  text-align: right;
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.totalVenda strong {
+  color: var(--success);
+  font-size: 17px;
+}
+
+/* --- Modal Detalhes --- */
+
+.detalhesInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 14px;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.detalhesLinha {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.detalhesLabel {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.erro {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.btnSalvar {
+  background-color: var(--accent);
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 20px;
+  transition: background 0.15s;
+}
+
+.btnSalvar:hover {
+  background-color: var(--accent-hover);
+}
