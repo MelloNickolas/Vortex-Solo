@@ -52,9 +52,9 @@ public class AuthApplication : IAuthApplication
             return new LoginResponse
             {
                 Token     = token,
+                UsuarioID = usuario.ID,
                 Nome      = usuario.Nome,
                 Email     = usuario.Email,
-                // Deve ser igual ao AddHours(8) configurado no JwtService
                 Expiracao = DateTime.UtcNow.AddHours(8)
             };
         }

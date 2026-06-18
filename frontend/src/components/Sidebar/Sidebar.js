@@ -1,15 +1,15 @@
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Package, Users, ShoppingCart, Warehouse, Tag, UserCog, } from 'lucide-react';
+import { BarChart2, Package, Users, ShoppingCart, Warehouse, Tag, UserCog } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
 // Lista de links da sidebar — centralizada aqui para facilitar adicionar/remover itens
 const links = [
-  { to: '/dashboard',  label: 'Dashboard',  icon: LayoutDashboard },
+  { to: '/relatorios', label: 'Relatórios', icon: BarChart2 },
   { to: '/produtos',   label: 'Produtos',   icon: Package },
   { to: '/categorias', label: 'Categorias', icon: Tag },
   { to: '/clientes',   label: 'Clientes',   icon: Users },
   { to: '/vendas',     label: 'Vendas',     icon: ShoppingCart },
-  { to: '/estoque',    label: 'Estoque',    icon: Warehouse },
+  { to: '/estoque',    label: 'Movimentações', icon: Warehouse },
   { to: '/usuarios',   label: 'Usuários',   icon: UserCog },
 ];
 

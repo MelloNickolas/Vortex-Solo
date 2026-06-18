@@ -6,6 +6,7 @@ public class LoginResponse
     public string Token { get; set; } = string.Empty;
 
     // Dados básicos do usuário logado, útil para exibir nome na tela sem chamar outra rota
+    public int UsuarioID { get; set; }
     public string Nome { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
 

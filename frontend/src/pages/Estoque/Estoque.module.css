@@ -1,0 +1,89 @@
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.botoes { display: flex; gap: 8px; }
+
+.btnEntrada {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--success);
+  color: var(--success);
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.btnEntrada:hover { opacity: 0.7; }
+
+.btnSaida {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.btnSaida:hover { opacity: 0.7; }
+
+.filtros {
+  margin-bottom: 16px;
+  max-width: 200px;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+}
+
+.tabela th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela td {
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela tr:last-child td { border-bottom: none; }
+.tabela tbody tr:hover { background-color: var(--bg-secondary); }
+
+.vazio {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 28px !important;
+}
+
+.badgeEntrada { color: var(--success); font-size: 13px; }
+.badgeSaida { color: var(--danger); font-size: 13px; }
+
+.erro { color: var(--danger); font-size: 13px; }
+
+.btnSalvar {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.btnSalvar:hover { opacity: 0.7; }

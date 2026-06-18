@@ -36,10 +36,11 @@ function Login() {
       // Salva o token no localStorage para ser usado nas próximas requisições
       localStorage.setItem('token', data.token);
       localStorage.setItem('usuarioNome', data.nome);
-      localStorage.setItem('usuarioId', data.usuarioId);
+      // usuarioID (maiúsculo) porque o C# serializa UsuarioID → usuarioID em camelCase
+      localStorage.setItem('usuarioId', data.usuarioID);
 
       // Redireciona para o dashboard após login bem-sucedido
-      navigate('/dashboard');
+      navigate('/relatorios');
     } catch (error) {
       setMensagem(error.response?.data?.mensagem || 'Erro ao fazer login.');
     }

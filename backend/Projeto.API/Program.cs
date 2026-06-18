@@ -10,6 +10,7 @@ using Projeto.Domain.Entities;
 using Projeto.Repository.Context;
 using Projeto.Repository.Interfaces;
 using Projeto.Repository.Repositories;
+using Projeto.Services.AI;
 using Projeto.Services.Auth;
 using Projeto.Services.Interfaces;
 
@@ -25,8 +26,10 @@ builder.Services.AddScoped<IClienteApplication, ClienteApplication>();
 builder.Services.AddScoped<IAuthApplication, AuthApplication>();
 builder.Services.AddScoped<IVendaApplication, VendaApplication>();
 builder.Services.AddScoped<IMovimentacaoApplication, MovimentacaoApplication>();
+builder.Services.AddScoped<IRelatorioApplication, RelatorioApplication>();
+builder.Services.AddScoped<IAIApplication, AIApplication>();
 
-// ── Repositories 
+// ── Repositories
 builder.Services.AddScoped<IEstadoRepository, EstadoRepository>();
 builder.Services.AddScoped<ICidadeRepository, CidadeRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
@@ -35,14 +38,16 @@ builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IVendaRepository, VendaRepository>();
 builder.Services.AddScoped<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
+builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
 
 // ── Services
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IBCryptService, BCryptService>();
+builder.Services.AddScoped<IAIService, AIService>();
 
 // ── Banco de dados
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // ── CORS 
 builder.Services.AddCors(options =>

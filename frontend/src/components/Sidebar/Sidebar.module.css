@@ -1,60 +1,45 @@
-/* Sidebar fixa na esquerda, altura total da tela */
 .sidebar {
-  width: 220px;
-  background-color: var(--bg-secondary); /* cor vem do :root no index.css */
+  width: 200px;
+  background-color: var(--bg-secondary);
   border-right: 1px solid var(--border);
   display: flex;
-  flex-direction: column; /* empilha logo e nav verticalmente */
+  flex-direction: column;
   padding: 24px 0;
-  height: 100vh; /* 100% da altura da janela */
+  height: 100vh;
   position: sticky;
-  top: 0; /* gruda no topo ao rolar a página */
+  top: 0;
 }
 
-/* Nome do sistema no topo */
 .logo {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
-  color: var(--accent);
-  padding: 0 24px 24px;
+  color: var(--text-primary);
+  padding: 0 20px 20px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-/* Container dos links de navegação */
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 4px; /* espaço entre os links */
   padding: 0 12px;
 }
 
-/* Estilo base de cada link */
 .link {
   display: flex;
-  align-items: center; /* ícone e texto alinhados verticalmente */
+  align-items: center;
   gap: 10px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  color: var(--text-secondary);
-  font-size: 14px;
-  transition: background 0.15s, color 0.15s; /* animação suave ao passar o mouse */
+  padding: 9px 10px;
+  color: var(--text-muted);
+  font-size: 13px;
 }
 
-/* Hover: destaque leve */
 .link:hover {
-  background-color: var(--bg-card);
   color: var(--text-primary);
 }
 
-/* Link da rota atual — fundo colorido */
 .active {
-  background-color: var(--accent);
-  color: #fff;
-}
-
-/* Hover no link ativo usa tom mais escuro do accent */
-.active:hover {
-  background-color: var(--accent-hover);
-  color: #fff;
+  color: var(--text-primary);
+  border-left: 2px solid var(--accent);
+  padding-left: 8px;
 }

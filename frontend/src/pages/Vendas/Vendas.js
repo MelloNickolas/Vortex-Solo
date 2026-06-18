@@ -5,7 +5,7 @@ import ClienteApi from '../../services/ClienteApi';
 import ProdutoApi from '../../services/ProdutoApi';
 import CategoriaApi from '../../services/CategoriaApi';
 import Modal from '../../components/Modal/Modal';
-import Input from '../../components/Input/Input';
+import Input from '../../components/Input/Input'; // usado no campo quantidade
 import SelectBusca from '../../components/SelectBusca/SelectBusca';
 import Pagination from '../../components/Pagination/Pagination';
 import styles from './Vendas.module.css';
@@ -22,7 +22,6 @@ const opcoesPagamento = [
 // Opções de filtro por status
 const opcoesStatus = [
   { value: '', label: 'Todos os status' },
-  { value: 'Pendente', label: 'Pendente' },
   { value: 'Concluida', label: 'Concluída' },
   { value: 'Cancelada', label: 'Cancelada' },
 ];
@@ -36,8 +35,6 @@ function Vendas() {
 
   // Filtros da listagem
   const [statusFiltro, setStatusFiltro] = useState('');
-  const [de, setDe] = useState('');
-  const [ate, setAte] = useState('');
 
   // Modal de nova venda
   const [modalNovaAberto, setModalNovaAberto] = useState(false);
@@ -61,22 +58,19 @@ function Vendas() {
   // Recarrega sempre que page ou filtros mudarem
   useEffect(() => {
     carregarVendas();
-  }, [page, statusFiltro, de, ate]);
+  }, [page, statusFiltro]);
 
   // Volta para página 1 quando filtros mudam
   useEffect(() => {
     setPage(1);
-  }, [statusFiltro, de, ate]);
+  }, [statusFiltro]);
 
   async function carregarVendas() {
     try {
       const data = await VendaApi.ListarAsync({
         page,
         pageSize,
-        // undefined não é enviado na URL
         status: statusFiltro || undefined,
-        de: de || undefined,
-        ate: ate || undefined,
       });
       setVendas(data.data);
       setTotalPages(Math.ceil(data.total / pageSize));
@@ -200,22 +194,28 @@ function Vendas() {
 
     // UsuarioID do usuário logado (salvo no localStorage no login)
     const usuarioId = parseInt(localStorage.getItem('usuarioId'));
+    if (!usuarioId || isNaN(usuarioId)) {
+      setErroNova('Sessão inválida. Faça logout e login novamente.');
+      return;
+    }
+
+    const body = {
+      ClienteID: Number(clienteId),
+      UsuarioID: usuarioId,
+      FormaPagamento: Number(formaPagamento),
+      Itens: itens.map((i) => ({
+        ProdutoID: i.produtoId,
+        Quantidade: i.quantidade,
+      })),
+    };
+    console.log('📦 Body enviado:', JSON.stringify(body));
 
     try {
-      await VendaApi.CriarAsync({
-        ClienteID: Number(clienteId),
-        UsuarioID: usuarioId,
-        // FormaPagamento é um enum inteiro no backend (1=Dinheiro, 2=Debito...)
-        FormaPagamento: Number(formaPagamento),
-        Itens: itens.map((i) => ({
-          ProdutoID: i.produtoId,
-          Quantidade: i.quantidade,
-        })),
-      });
+      await VendaApi.CriarAsync(body);
       await carregarVendas();
       fecharModalNova();
     } catch (error) {
-      // Tenta mostrar a mensagem do backend, senão mostra o texto genérico
+      console.error('❌ Response error:', JSON.stringify(error.response?.data));
       const msg = error.response?.data?.mensagem
         || error.response?.data?.title
         || 'Erro ao criar venda.';
@@ -287,7 +287,7 @@ function Vendas() {
         </button>
       </div>
 
-      {/* Filtros: status + intervalo de datas */}
+      {/* Filtro por status */}
       <div className={styles.filtros}>
         <div className={styles.filtroStatus}>
           <SelectBusca
@@ -295,22 +295,6 @@ function Vendas() {
             value={statusFiltro}
             onChange={setStatusFiltro}
             options={opcoesStatus}
-          />
-        </div>
-        <div className={styles.filtroData}>
-          <Input
-            label="De"
-            type="date"
-            value={de}
-            onChange={(e) => setDe(e.target.value)}
-          />
-        </div>
-        <div className={styles.filtroData}>
-          <Input
-            label="Até"
-            type="date"
-            value={ate}
-            onChange={(e) => setAte(e.target.value)}
           />
         </div>
       </div>

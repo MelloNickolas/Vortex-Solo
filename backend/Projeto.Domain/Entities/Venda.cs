@@ -7,7 +7,7 @@ public class Venda
     public int ID { get; set; }
     public DateTime DataVenda { get; set; } = DateTime.UtcNow;
     public decimal ValorTotal { get; set; }
-    public StatusVenda Status { get; set; } = StatusVenda.Pendente;
+    public StatusVenda Status { get; set; } = StatusVenda.Concluida;
     public FormaPagamento FormaPagamento { get; set; }
 
     public int ClienteID { get; set; }

@@ -31,7 +31,7 @@ public class AppDbContext : DbContext
     {
         // Fallback para quando o contexto é instanciado sem injeção de dependência (ex: migrations via CLI)
         if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseSqlite(@"Data Source=./vortex.db");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-2T4L4UE\SQLEXPRESS;Database=VortexDB;Trusted_Connection=True;TrustServerCertificate=True;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

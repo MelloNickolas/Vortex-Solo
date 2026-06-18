@@ -1,28 +1,17 @@
-/* Estado padrão — botão apagado */
 .btn {
-  padding: 9px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  background-color: var(--bg-card);
+  padding: 7px 14px;
+  font-size: 13px;
+  background: none;
   border: 1px solid var(--border);
-  color: var(--text-secondary);
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  color: var(--text-muted);
   white-space: nowrap;
 }
 
-.btn:hover {
-  border-color: var(--accent);
-  color: var(--text-primary);
-}
+.btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
 
-/* Estado ativo — quando está filtrando inativos */
 .ativo {
-  background-color: var(--danger);
   border-color: var(--danger);
-  color: #fff;
+  color: var(--danger);
 }
 
-.ativo:hover {
-  background-color: var(--danger-hover);
-  border-color: var(--danger-hover);
-}
+.ativo:hover { opacity: 0.7; }

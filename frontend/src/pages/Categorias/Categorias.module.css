@@ -1,49 +1,38 @@
-/* Topo da página com título e botão */
 .topo {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
-/* Botão de nova categoria */
 .btnNovo {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background-color: var(--accent);
-  color: #fff;
-  padding: 9px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  transition: background 0.15s;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 7px 14px;
+  font-size: 13px;
 }
 
-.btnNovo:hover {
-  background-color: var(--accent-hover);
-}
+.btnNovo:hover { opacity: 0.7; }
 
-/* Área de filtros */
 .filtros {
-  margin-bottom: 20px;
-  max-width: 320px;
+  margin-bottom: 16px;
+  max-width: 300px;
 }
 
-/* Tabela */
 .tabela {
   width: 100%;
   border-collapse: collapse;
-  background-color: var(--bg-card);
-  border-radius: 10px;
-  overflow: hidden;
   border: 1px solid var(--border);
 }
 
 .tabela th {
   text-align: left;
-  padding: 12px 16px;
-  font-size: 12px;
+  padding: 10px 14px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -51,77 +40,40 @@
 }
 
 .tabela td {
-  padding: 12px 16px;
+  padding: 10px 14px;
   color: var(--text-primary);
   font-size: 14px;
   border-bottom: 1px solid var(--border);
 }
 
-/* Remove a borda da última linha */
-.tabela tr:last-child td {
-  border-bottom: none;
-}
+.tabela tr:last-child td { border-bottom: none; }
+.tabela tbody tr:hover { background-color: var(--bg-secondary); }
 
-.tabela tbody tr:hover {
-  background-color: var(--bg-secondary);
-}
-
-/* Mensagem de lista vazia */
 .vazio {
   text-align: center;
   color: var(--text-muted);
-  padding: 32px !important;
+  padding: 28px !important;
 }
 
-/* Botões de ação (editar/deletar) */
-.acoes {
-  display: flex;
-  gap: 8px;
-}
+.acoes { display: flex; gap: 8px; }
 
-.btnEditar {
-  background: none;
-  color: var(--accent);
-  padding: 4px;
-  border-radius: 4px;
-  transition: opacity 0.15s;
-}
+.btnEditar { background: none; color: var(--accent); padding: 3px; }
+.btnEditar:hover { opacity: 0.7; }
 
-.btnEditar:hover {
-  opacity: 0.7;
-}
+.btnDeletar { background: none; color: var(--danger); padding: 3px; }
+.btnDeletar:hover { opacity: 0.7; }
 
-.btnDeletar {
-  background: none;
-  color: var(--danger);
-  padding: 4px;
-  border-radius: 4px;
-  transition: opacity 0.15s;
-}
+.erro { color: var(--danger); font-size: 13px; }
 
-.btnDeletar:hover {
-  opacity: 0.7;
-}
-
-/* Mensagem de erro dentro do modal */
-.erro {
-  color: var(--danger);
-  font-size: 13px;
-}
-
-/* Botão salvar dentro do modal */
 .btnSalvar {
-  background-color: var(--accent);
-  color: #fff;
-  padding: 10px;
-  border-radius: 8px;
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 9px;
   font-size: 14px;
   font-weight: 600;
   width: 100%;
-  transition: background 0.15s;
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
-.btnSalvar:hover {
-  background-color: var(--accent-hover);
-}
+.btnSalvar:hover { opacity: 0.7; }

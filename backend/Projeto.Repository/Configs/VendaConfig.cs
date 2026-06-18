@@ -14,8 +14,8 @@ public class VendaConfig : IEntityTypeConfiguration<Venda>
         builder.Property(v => v.ID).ValueGeneratedOnAdd();
 
         builder.Property(v => v.ValorTotal).HasColumnType("decimal(18,2)").IsRequired();
-        builder.Property(v => v.Status).HasConversion<string>().IsRequired(true);
-        builder.Property(v => v.FormaPagamento).HasConversion<string>().IsRequired(true);
+        builder.Property(v => v.Status).HasConversion<int>().IsRequired(true);
+        builder.Property(v => v.FormaPagamento).HasConversion<int>().IsRequired(true);
 
         builder.HasOne(v => v.Cliente)
             .WithMany(c => c.Vendas)

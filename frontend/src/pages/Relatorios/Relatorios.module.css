@@ -1,0 +1,133 @@
+.carregando {
+  color: var(--text-muted);
+  margin-top: 32px;
+}
+
+.secao {
+  margin-bottom: 40px;
+}
+
+.secaoTitulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.fonte {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.alerta {
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* ── Cards ── */
+.cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  min-width: 140px;
+}
+
+.cardLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.cardValor {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ── Tabelas ── */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabela th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.tabela td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.vazio {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ── Cores ── */
+.verde { color: var(--success); }
+.vermelho { color: var(--danger); }
+
+/* ── IA ── */
+.iaBloco {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.iaItem {
+  border: 1px solid var(--border);
+  padding: 16px;
+}
+
+.iaHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.iaBotao {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.iaBotao:hover:not(:disabled) { opacity: 0.7; }
+.iaBotao:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.iaResposta {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  border-left: 2px solid var(--accent);
+  padding-left: 12px;
+}

@@ -1,47 +1,42 @@
-/* Fundo escuro que cobre tudo */
 .overlay {
   position: fixed;
-  inset: 0; /* equivale a top:0, right:0, bottom:0, left:0 */
-  background-color: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100; /* fica na frente de tudo */
+  z-index: 100;
 }
 
-/* Card central do modal */
 .card {
   background-color: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
   width: 100%;
   max-width: 480px;
   padding: 24px;
 }
 
-/* Cabeçalho com título e botão fechar */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
 .titulo {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-primary);
 }
 
-/* Botão X para fechar */
 .btnFechar {
   background: none;
   color: var(--text-muted);
   display: flex;
   align-items: center;
-  padding: 4px;
-  border-radius: 4px;
-  transition: color 0.15s;
+  padding: 2px;
 }
 
 .btnFechar:hover {
@@ -51,5 +46,5 @@
 .corpo {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
