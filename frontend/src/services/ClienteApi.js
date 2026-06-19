@@ -44,7 +44,6 @@ const ClienteApi = {
         }
     },
 
-    // Soft delete — marca como inativo, não remove do banco
     async DeletarAsync(id) {
         try {
             const response = await HTTPClient.delete(`/cliente/${id}`);
@@ -55,7 +54,6 @@ const ClienteApi = {
         }
     },
 
-    // Reativa um cliente que foi desativado
     async ReativarAsync(id) {
         try {
             const response = await HTTPClient.patch(`/cliente/${id}/reativar`);

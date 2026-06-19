@@ -2,13 +2,23 @@ import { HTTPClient } from './client';
 
 const AIApi = {
     async AnalisarVendasAsync() {
-        const response = await HTTPClient.post('/ai/analisar-vendas');
-        return response.data;
+        try {
+            const response = await HTTPClient.post('/ai/analisar-vendas');
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao analisar vendas com IA:', error);
+            throw error;
+        }
     },
 
     async AnalisarEstoqueAsync() {
-        const response = await HTTPClient.post('/ai/analisar-estoque');
-        return response.data;
+        try {
+            const response = await HTTPClient.post('/ai/analisar-estoque');
+            return response.data;
+        } catch (error) {
+            console.error('Erro ao analisar estoque com IA:', error);
+            throw error;
+        }
     },
 };
 

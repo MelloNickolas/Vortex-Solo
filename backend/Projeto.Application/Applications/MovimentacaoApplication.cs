@@ -38,9 +38,9 @@ public class MovimentacaoApplication : IMovimentacaoApplication
 
             return new PagedResponse<MovimentacaoResponse>
             {
-                Data     = items.Select(m => MapearResponse(m)).ToList(),
-                Total    = total,
-                Page     = page,
+                Data = items.Select(m => MapearResponse(m)).ToList(),
+                Total = total,
+                Page = page,
                 PageSize = pageSize
             };
         }
@@ -78,12 +78,12 @@ public class MovimentacaoApplication : IMovimentacaoApplication
 
             var movimentacao = await _movimentacaoRepository.AddAsync(new MovimentacaoEstoque
             {
-                Tipo          = request.Tipo,
-                Motivo        = request.Motivo,
-                Quantidade    = request.Quantidade,
+                Tipo = request.Tipo,
+                Motivo = request.Motivo,
+                Quantidade = request.Quantidade,
                 DataMovimento = DateTime.UtcNow,
-                ProdutoID     = request.ProdutoID,
-                UsuarioID     = request.UsuarioID
+                ProdutoID = request.ProdutoID,
+                UsuarioID = request.UsuarioID
             });
 
             return MapearResponse(movimentacao);

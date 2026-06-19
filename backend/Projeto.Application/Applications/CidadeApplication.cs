@@ -22,8 +22,8 @@ public class CidadeApplication : ICidadeApplication
 
             return cidades.Select(c => new CidadeResponse
             {
-                ID       = c.ID,
-                Nome     = c.Nome,
+                ID = c.ID,
+                Nome = c.Nome,
                 EstadoID = c.EstadoID
             }).ToList();
         }
@@ -44,8 +44,8 @@ public class CidadeApplication : ICidadeApplication
 
             return new CidadeResponse
             {
-                ID       = cidade.ID,
-                Nome     = cidade.Nome,
+                ID = cidade.ID,
+                Nome = cidade.Nome,
                 EstadoID = cidade.EstadoID
             };
         }

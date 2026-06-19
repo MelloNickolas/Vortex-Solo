@@ -16,7 +16,7 @@ using Projeto.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ── Applications
+// Applications
 builder.Services.AddScoped<IEstadoApplication, EstadoApplication>();
 builder.Services.AddScoped<ICidadeApplication, CidadeApplication>();
 builder.Services.AddScoped<ICategoriaApplication, CategoriaApplication>();
@@ -29,7 +29,7 @@ builder.Services.AddScoped<IMovimentacaoApplication, MovimentacaoApplication>();
 builder.Services.AddScoped<IRelatorioApplication, RelatorioApplication>();
 builder.Services.AddScoped<IAIApplication, AIApplication>();
 
-// ── Repositories
+// Repositories
 builder.Services.AddScoped<IEstadoRepository, EstadoRepository>();
 builder.Services.AddScoped<ICidadeRepository, CidadeRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
@@ -40,16 +40,16 @@ builder.Services.AddScoped<IVendaRepository, VendaRepository>();
 builder.Services.AddScoped<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
 builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
 
-// ── Services
+//Services
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IBCryptService, BCryptService>();
 builder.Services.AddScoped<IAIService, AIService>();
 
-// ── Banco de dados
+//Banco de dados
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ── CORS 
+//CORS 
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -60,18 +60,18 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ── Controllers e o Swagger
+// Controllers e o Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
-        Name         = "Authorization",
-        Type         = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-        Scheme       = "Bearer",
+        Name = "Authorization",
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "Bearer",
         BearerFormat = "JWT",
-        In           = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
         Description  = "Informe o token JWT. Exemplo: Bearer {seu_token}"
     });
 
@@ -91,33 +91,33 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-// ── JWT
+// JWT
 var jwtChave = builder.Configuration["Jwt:Chave"]!;
 var chave = Encoding.UTF8.GetBytes(jwtChave);
 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme    = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(options =>
 {
     options.RequireHttpsMetadata = false;
-    options.SaveToken            = true;
+    options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey         = new SymmetricSecurityKey(chave),
-        ValidateIssuer           = true,
-        ValidIssuer              = builder.Configuration["Jwt:Issuer"],
-        ValidateAudience         = true,
-        ValidAudience            = builder.Configuration["Jwt:Audience"]
+        IssuerSigningKey = new SymmetricSecurityKey(chave),
+        ValidateIssuer = true,
+        ValidIssuer  = builder.Configuration["Jwt:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["Jwt:Audience"]
     };
 });
 
 var app = builder.Build();
 
-// ── Migrations
+// Migrations
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
@@ -127,19 +127,18 @@ using (var scope = app.Services.CreateScope())
     {
         db.Usuarios.Add(new Usuario
         {
-            Nome      = "Administrador",
-            Email     = "admin@vortex.com",
+            Nome = "Administrador",
+            Email = "admin@vortex.com",
             SenhaHash = BCrypt.Net.BCrypt.HashPassword("admin123"),
             Telefone  = "",
             CriadoEm = DateTime.UtcNow,
-            Ativo     = true
+            Ativo = true
         });
 
         db.SaveChanges();
     }
 }
 
-// ── Pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

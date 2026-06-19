@@ -8,25 +8,20 @@ import SelectBusca from '../../components/SelectBusca/SelectBusca';
 import Pagination from '../../components/Pagination/Pagination';
 import styles from './Estoque.module.css';
 
+// vamos usar para passar no select
 const opcoesTipo = [
   { value: '', label: 'Todos os tipos' },
   { value: 'Entrada', label: 'Entrada' },
   { value: 'Saida', label: 'Saída' },
 ];
-
-// Motivos disponíveis para entrada manual
 const motivosEntrada = [
   { value: 3, label: 'Compra' },
   { value: 4, label: 'Devolução' },
 ];
-
-// Motivos disponíveis para saída manual
 const motivosSaida = [
   { value: 5, label: 'Ajuste Manual' },
   { value: 6, label: 'Perda/Extravio' },
 ];
-
-// Mapa para exibir o motivo em português legível
 const labelMotivo = {
   Venda: 'Venda',
   CancelamentoVenda: 'Cancelamento de Venda',

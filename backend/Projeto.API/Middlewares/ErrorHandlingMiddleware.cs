@@ -27,7 +27,7 @@ public class ErrorHandlingMiddleware
         }
         catch (Exception ex)
         {
-            await TratarExcecao(context, ex); // se qualquer coisa explodir, intercepta
+            await TratarExcecao(context, ex); // se qualquer coisa der erro, intercepta
         }
     }
 

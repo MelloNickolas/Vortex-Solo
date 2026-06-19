@@ -17,16 +17,14 @@ public class VendaController : ControllerBase
         _vendaApplication = vendaApplication;
     }
 
-    // GET /api/venda?page=1&pageSize=10&status=Concluida&de=2026-01-01&ate=2026-12-31
     [HttpGet]
     public async Task<IActionResult> Listar(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10,
-        [FromQuery] string? status = null,
-        [FromQuery] DateTime? de = null,
-        [FromQuery] DateTime? ate = null)
+        [FromQuery] string? status = null
+        )
     {
-        var response = await _vendaApplication.ListarPagedAsync(page, pageSize, status, de, ate);
+        var response = await _vendaApplication.ListarPagedAsync(page, pageSize, status);
         return Ok(response);
     }
 

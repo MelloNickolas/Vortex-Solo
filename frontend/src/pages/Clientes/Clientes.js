@@ -12,11 +12,9 @@ import styles from './Clientes.module.css';
 
 function Clientes() {
   const [clientes, setClientes] = useState([]);
-
-  // Filtros
+  //filtro 
   const [busca, setBusca] = useState('');
   const [mostrarInativos, setMostrarInativos] = useState(false);
-
   // Paginação
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -27,7 +25,7 @@ function Clientes() {
   const [clienteEditando, setClienteEditando] = useState(null);
   const [erro, setErro] = useState('');
 
-  // Campos do formulário
+  // Campos do formulário pra editar ou pra criar um novo
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [telefone, setTelefone] = useState('');
@@ -41,7 +39,7 @@ function Clientes() {
   const [estadoId, setEstadoId] = useState('');
   const [cidadeId, setCidadeId] = useState('');
 
-  // Carrega estados e clientes ao montar a página
+  // Carrega estados e clientes ao montar a página, lembra do include, aqui entra na pratica
   useEffect(() => {
     carregarEstados();
   }, []);
@@ -49,17 +47,17 @@ function Clientes() {
   // Recarrega clientes quando filtros ou página mudam
   useEffect(() => {
     carregarClientes();
-  }, [page, busca, mostrarInativos]);
+  }, [page, busca, mostrarInativos]); // se mudar um desses ele recarrega tudo
 
   // Quando o estado muda, carrega as cidades daquele estado e limpa a cidade selecionada
   useEffect(() => {
-    if (estadoId) {
+    if (estadoId) /* tem valor? carrega as cidades desse estado entao */ {
       carregarCidades(estadoId);
     } else {
-      setCidades([]);
+      setCidades([]); // mostra tudo
     }
     setCidadeId('');
-  }, [estadoId]);
+  }, [estadoId]); // recarrega quando mudar de estado
 
   async function carregarClientes() {
     try {
@@ -68,16 +66,22 @@ function Clientes() {
         pageSize,
         busca: busca || undefined,
         // Se mostrarInativos for true, passa false (mostra inativos)
-        // Se for false, passa true (mostra só ativos)
+        // Se for false, passa true ------ mostra so os ativos
         ativo: mostrarInativos ? false : true,
       });
-      setClientes(data.data);
-      setTotalPages(Math.ceil(data.total / pageSize));
+      setClientes(data.data); // passa o data como parametro
+      setTotalPages(Math.ceil(data.total / pageSize)); // aqui calculamos quanto tem de pagina para mostrar
     } catch (error) {
       console.error('Erro ao carregar clientes:', error);
     }
   }
 
+
+
+
+
+
+  // ve se carrega estado certo
   async function carregarEstados() {
     try {
       const data = await EstadoApi.ListarAsync();
@@ -87,6 +91,7 @@ function Clientes() {
     }
   }
 
+  // ve se carrega a cidade dql estado certo
   async function carregarCidades(idEstado) {
     try {
       const data = await CidadeApi.ListarPorEstadoAsync(idEstado);
@@ -96,26 +101,28 @@ function Clientes() {
     }
   }
 
+  
   function handleBuscaChange(e) {
-    setBusca(e.target.value);
-    setPage(1);
+    setBusca(e.target.value); // atualiza a busca quando digitar
+    setPage(1); // e sempre volta pra pagina 1
+  }
+  function handleMostrarInativos(valor) {
+    setMostrarInativos(valor); // atualiza
+    setPage(1); // volta pra pagina 1
   }
 
-  function handleMostrarInativos(valor) {
-    setMostrarInativos(valor);
-    setPage(1);
-  }
+
 
   function abrirModalCriacao() {
-    setClienteEditando(null);
+    setClienteEditando(null); // fala que nao e para editar
     setNome(''); setCpf(''); setTelefone(''); setEmail('');
     setRua(''); setNumero(''); setEstadoId(''); setCidadeId('');
-    setErro('');
+    setErro(''); // msg de erro
     setModalAberto(true);
   }
 
   async function abrirModalEdicao(cliente) {
-    setClienteEditando(cliente);
+    setClienteEditando(cliente); // fala que o modal é para editar
     setNome(cliente.nome);
     setCpf(cliente.cpf);
     setTelefone(cliente.telefone);
@@ -123,7 +130,7 @@ function Clientes() {
     setRua(cliente.rua);
     setNumero(cliente.numero);
     setCidadeId(cliente.cidadeID);
-    setErro('');
+    setErro(''); // msg de erro
 
     // Precisa buscar o estado da cidade para preencher o select de estado
     // A resposta da cidade tem o estadoID
@@ -146,6 +153,7 @@ function Clientes() {
     e.preventDefault();
     setErro('');
 
+    // aqui basicamente criamos o nosso ClienteRequest
     const payload = {
       Nome: nome,
       CPF: cpf,
@@ -198,6 +206,7 @@ function Clientes() {
   { value: 2, label: 'Rio de Janeiro (RJ)' },
 ]  
   */
+ // vamos passar no select
   const opcoesEstados = estados.map((e) => ({ value: e.id, label: `${e.nome} (${e.uf})` }));
   const opcoesCidades = cidades.map((c) => ({ value: c.id, label: c.nome }));
 

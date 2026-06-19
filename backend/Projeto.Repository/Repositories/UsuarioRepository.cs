@@ -14,17 +14,17 @@ public class UsuarioRepository : BaseRepository, IUsuarioRepository
     {
         var query = _context.Usuarios.AsQueryable();
 
-        // Filtra por nome OU email (os dois campos que fazem sentido buscar em usuário)
+        // Filtra por nome OU email 
         if (!string.IsNullOrWhiteSpace(busca))
             query = query.Where(u =>
                 u.Nome.ToLower().Contains(busca.ToLower()) ||
                 u.Email.ToLower().Contains(busca.ToLower()));
 
-        // Filtra por status ativo/inativo se enviado
+        // Filtra por status ativo oui inativo se enviado
         if (ativo.HasValue)
             query = query.Where(u => u.Ativo == ativo.Value);
 
-        // Conta o total com os filtros aplicados (antes de paginar)
+        // Conta o total com os filtros aplicados
         var total = await query.CountAsync();
 
         var items = await query
@@ -60,7 +60,6 @@ public class UsuarioRepository : BaseRepository, IUsuarioRepository
         await _context.SaveChangesAsync();
     }
 
-    // Soft delete — Application busca o objeto, valida e passa aqui já resolvido
     public async Task DeleteAsync(Usuario usuario)
     {
         usuario.Ativo = false;

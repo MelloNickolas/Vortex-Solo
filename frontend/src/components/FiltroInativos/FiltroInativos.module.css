@@ -7,7 +7,9 @@
   white-space: nowrap;
 }
 
-.btn:hover { color: var(--text-primary); border-color: var(--text-muted); }
+.btn:hover { 
+  color: var(--text-primary); 
+  border-color: var(--text-muted); }
 
 .ativo {
   border-color: var(--danger);

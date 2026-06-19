@@ -1,10 +1,10 @@
 import styles from './FiltroInativos.module.css';
 
-// value (true/false), onChange (função chamada ao clicar)
+// onChange é a funcao que vai chamar
 function FiltroInativos({ value, onChange }) {
   return (
     <button
-      // Se value for true (mostrando inativos), aplica estilo ativo
+      // Se value for true que é para mostrando inativos, aplica estilo ativo
       className={value ? `${styles.btn} ${styles.ativo}` : styles.btn}
       onClick={() => onChange(!value)} // inverte o valor atual ao clicar
       type="button"

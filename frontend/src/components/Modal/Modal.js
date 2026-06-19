@@ -2,11 +2,11 @@ import { X } from 'lucide-react';
 import styles from './Modal.module.css';
 
 
-// titulo, onClose (função para fechar), children (conteúdo interno)
-function Modal({ titulo, onClose, children }) {
+// 
+function Modal({ titulo, onClose /*funcao para fechar*/ , children }) {
   return (
-    // Fundo escuro que cobre a página inteira
-    <div className={styles.overlay} onClick={onClose}>
+    // Fundo escuro da página, e se apertar nele, fecha
+    <div className={styles.overlay} onClick={onClose}> 
 
       {/* O e.stopPropagation() impede que clicar dentro do card feche o modal */}
       <div className={styles.card} onClick={(e) => e.stopPropagation()}>
@@ -19,7 +19,7 @@ function Modal({ titulo, onClose, children }) {
           </button>
         </div>
 
-        {/* Conteúdo passado por dentro do componente */}
+      
         <div className={styles.corpo}>
           {children}
         </div>

@@ -6,7 +6,7 @@ namespace Projeto.Application.Interfaces;
 
 public interface IVendaApplication
 {
-    Task<PagedResponse<VendaResponse>> ListarPagedAsync(int page, int pageSize, string? status, DateTime? de, DateTime? ate);
+    Task<PagedResponse<VendaResponse>> ListarPagedAsync(int page, int pageSize, string? status);
     Task<VendaResponse> BuscarPorIdAsync(int id);
     Task<VendaResponse> CriarAsync(VendaRequest request);
     Task<VendaResponse> CancelarAsync(int id, int usuarioId);

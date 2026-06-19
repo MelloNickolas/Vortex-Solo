@@ -105,13 +105,16 @@ function Vendas() {
   }
 
   // Quando a categoria muda, busca os produtos dessa categoria no backend
-  // e limpa o produto que estava selecionado (igual ao padrão Estado→Cidade)
+  // e limpa o produto que estava selecionado
   useEffect(() => {
     if (!categoriaIdItem) {
       setProdutos([]);
       setProdutoIdItem('');
       return;
     }
+
+
+
     async function carregarProdutosDaCategoria() {
       try {
         const data = await ProdutoApi.ListarAsync({
@@ -125,6 +128,9 @@ function Vendas() {
         console.error('Erro ao carregar produtos da categoria:', error);
       }
     }
+
+
+
     carregarProdutosDaCategoria();
   }, [categoriaIdItem]);
 
@@ -139,19 +145,30 @@ function Vendas() {
     const produto = produtos.find((p) => p.id === Number(produtoIdItem));
     if (!produto) return;
 
-    const qty = parseInt(quantidadeItem) || 1;
+    const qty = parseInt(quantidadeItem) || 1; // vamos pegar a quantidade digitada e transformar em um número, caso dê errado deixa como 1
 
-    // Se o produto já está na lista, só soma a quantidade
+    // Se o produto já está na lista, só soma a quantidade, previni erros
     const jaExiste = itens.find((i) => i.produtoId === produto.id);
     if (jaExiste) {
       setItens(itens.map((i) =>
         i.produtoId === produto.id
           ? { ...i, quantidade: i.quantidade + qty, subtotal: (i.quantidade + qty) * i.precoUnitario }
           : i
+        /*
+        ...i
+        é equivalente a, é como se voce escrevesse na mao... entqao copiamos tudo e so mudamos a quantidade e o subtotal
+        {
+          produtoId: 7,
+          produtoNome: 'Coca-Cola',
+          quantidade: 2,
+          precoUnitario: 5.00,
+          subtotal: 10.00,
+        }
+        */
       ));
     } else {
       setItens([
-        ...itens,
+        ...itens, // a mesma coisa copiamos tudo que ja tem e mudamos os itens abaixo, ou seja mantemos todos os itens e adicionamos outro ai dentro
         {
           produtoId: produto.id,
           produtoNome: produto.nome,
@@ -170,9 +187,13 @@ function Vendas() {
 
   function handleRemoverItem(produtoId) {
     setItens(itens.filter((i) => i.produtoId !== produtoId));
+    // tira o item da conta
   }
 
   // Soma todos os subtotais dos itens
+  // reduce ele vai reduzir todos os valores para um só, entao basicamente
+  // acc == acumulador, vai ser o valor que vai acumulando
+  // 0 == é o valor que inicia
   const totalVenda = itens.reduce((acc, item) => acc + item.subtotal, 0);
 
   async function handleCriar(e) {
@@ -194,7 +215,7 @@ function Vendas() {
 
     // UsuarioID do usuário logado (salvo no localStorage no login)
     const usuarioId = parseInt(localStorage.getItem('usuarioId'));
-    if (!usuarioId || isNaN(usuarioId)) {
+    if (!usuarioId || isNaN(usuarioId)) { // se o ID for vazio, ou o usuário nao é um numero de vdd
       setErroNova('Sessão inválida. Faça logout e login novamente.');
       return;
     }
@@ -208,17 +229,17 @@ function Vendas() {
         Quantidade: i.quantidade,
       })),
     };
-    console.log('📦 Body enviado:', JSON.stringify(body));
+    console.log('Body enviado:', JSON.stringify(body)); // é pra testar, ver se ta eniando certinho
 
     try {
       await VendaApi.CriarAsync(body);
       await carregarVendas();
       fecharModalNova();
     } catch (error) {
-      console.error('❌ Response error:', JSON.stringify(error.response?.data));
+      console.error('Response error:', JSON.stringify(error.response?.data));
       const msg = error.response?.data?.mensagem
         || error.response?.data?.title
-        || 'Erro ao criar venda.';
+        || 'Erro ao criar venda.'; // essa || vai mostrar o da direita, quando o da esquerda tiver vazio
       setErroNova(msg);
     }
   }
@@ -240,7 +261,7 @@ function Vendas() {
     try {
       const data = await VendaApi.BuscarPorIdAsync(venda.id);
       setVendaSelecionada(data);
-      setModalDetalhesAberto(true);
+      setModalDetalhesAberto(true); // fala que é o modal de detalhes esta aberto
     } catch (error) {
       console.error('Erro ao buscar detalhes da venda:', error);
     }
@@ -252,6 +273,7 @@ function Vendas() {
   }
 
   // Formata data ISO para dd/mm/aaaa hh:mm
+  // helper
   function formatarData(iso) {
     const d = new Date(iso);
     const data = d.toLocaleDateString('pt-BR');
@@ -259,7 +281,7 @@ function Vendas() {
     return `${data} ${hora}`;
   }
 
-  // Opções do SelectBusca de clientes: value=id, label=nome
+  // Opções do SelectBusca de clientes value=id, label=nome
   const opcoesClientes = clientes.map((c) => ({
     value: c.id,
     label: c.nome,
@@ -271,7 +293,7 @@ function Vendas() {
     label: c.nome,
   }));
 
-  // Opções do SelectBusca de produtos — mostra nome, preço e estoque disponível
+  // Opções do SelectBusca de produtos mostra nome, preço e estoque disponível
   const opcoesProdutos = produtos.map((p) => ({
     value: p.id,
     label: `${p.nome} — R$ ${Number(p.preco).toFixed(2)} (${p.estoqueAtual} em estoque)`,
@@ -336,7 +358,7 @@ function Vendas() {
                     <button className={styles.btnVer} onClick={() => abrirDetalhes(venda)}>
                       <Eye size={15} />
                     </button>
-                    {/* X para cancelar — só aparece se não estiver cancelada */}
+                    {/* X para cancelar, só aparece se não estiver cancelada */}
                     {venda.status !== 'Cancelada' && (
                       <button className={styles.btnCancelar} onClick={() => handleCancelar(venda.id)}>
                         <X size={15} />
@@ -387,7 +409,7 @@ function Vendas() {
                 options={opcoesCategorias}
               />
 
-              {/* Produto só aparece depois de selecionar a categoria — igual Estado→Cidade */}
+              {/* Produto só aparece depois de selecionar a categori*/}
               {categoriaIdItem && (
                 <div className={styles.adicionarItem}>
                   <div className={styles.selectProduto}>
@@ -450,11 +472,14 @@ function Vendas() {
                     </tbody>
                   </table>
                   <p className={styles.totalVenda}>
-                    Total: <strong>R$ {totalVenda.toFixed(2)}</strong>
+                    Total: R$ {totalVenda.toFixed(2)}
                   </p>
                 </>
-              )}
+              )} 
             </div>
+
+
+
 
             {erroNova && <p className={styles.erro}>{erroNova}</p>}
             <button type="submit" className={styles.btnSalvar}>
@@ -465,7 +490,7 @@ function Vendas() {
       )}
 
       {/* Modal detalhes da venda */}
-      {modalDetalhesAberto && vendaSelecionada && (
+      {modalDetalhesAberto && vendaSelecionada && ( // se o model estiver true, e a venda selecionada tiver um id dentro, tu mostra
         <Modal titulo="Detalhes da Venda" onClose={fecharModalDetalhes}>
           <div className={styles.detalhesInfo}>
             <div className={styles.detalhesLinha}>
@@ -486,8 +511,9 @@ function Vendas() {
             </div>
             <div className={styles.detalhesLinha}>
               <span className={styles.detalhesLabel}>Status</span>
-              <span className={styles[`status${vendaSelecionada.status}`]}>
-                {vendaSelecionada.status === 'Concluida' ? 'Concluída' : vendaSelecionada.status}
+              <span>
+                {/*se o status tiver concluida mostra concluida, se nao mostra cancelada*/}
+                {vendaSelecionada.status === 'Concluida' ? 'Concluída' : vendaSelecionada.status} 
               </span>
             </div>
           </div>

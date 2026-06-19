@@ -1,6 +1,11 @@
 import styles from './Select.module.css';
 
-// label, value, onChange, e options (array de { value, label })
+
+// label é o texto que vai aparecer primeiro no select
+// value é o valor que ta selecionado, exemplo, concluido ou cancelada
+// onchnage é a funcao para mudar o value
+// options passa o value do select e tbm oq vai querer mostrar quando estiver selecionado
+// props é o resto
 function Select({ label, value, onChange, options = [], ...props }) {
   return (
     <div className={styles.wrapper}>

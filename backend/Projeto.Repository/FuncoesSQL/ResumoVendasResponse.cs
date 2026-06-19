@@ -1,5 +1,7 @@
-namespace Projeto.Domain.DTOs;
+namespace Projeto.Repository.FuncoesSQL;
 
+// VIEW: vw_ResumoVendas
+// Consolida os totais gerais de vendas do sistema.
 public class ResumoVendasResponse
 {
     public int TotalVendas { get; set; }

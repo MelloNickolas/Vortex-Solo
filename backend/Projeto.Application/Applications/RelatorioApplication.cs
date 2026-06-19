@@ -1,5 +1,5 @@
 using Projeto.Application.Interfaces;
-using Projeto.Domain.DTOs;
+using Projeto.Repository.FuncoesSQL;
 using Projeto.Repository.Interfaces;
 
 namespace Projeto.Application.Applications;
@@ -14,14 +14,27 @@ public class RelatorioApplication : IRelatorioApplication
     }
 
     public Task<ResumoVendasResponse?> BuscarResumoAsync()
-        => _relatorioRepository.BuscarResumoAsync();
+    {
+        return _relatorioRepository.BuscarResumoAsync();
+    }
 
     public Task<List<ProdutoAbaixoMinimoResponse>> ListarProdutosAbaixoMinimoAsync()
-        => _relatorioRepository.ListarProdutosAbaixoMinimoAsync();
+    {
+        return _relatorioRepository.ListarProdutosAbaixoMinimoAsync();
+    }
 
     public Task<List<VendaPorFormaPagamentoResponse>> ListarVendasPorFormaPagamentoAsync()
-        => _relatorioRepository.ListarVendasPorFormaPagamentoAsync();
+    {
+        return _relatorioRepository.ListarVendasPorFormaPagamentoAsync();
+    }
 
     public Task<List<ProdutoMaisVendidoResponse>> ListarProdutosMaisVendidosAsync(int top = 10)
-        => _relatorioRepository.ListarProdutosMaisVendidosAsync(top);
+    {
+        return _relatorioRepository.ListarProdutosMaisVendidosAsync(top);
+    }
+
+    public Task<decimal> ConsultarTotalClienteAsync(int clienteId)
+    {
+        return _relatorioRepository.ConsultarTotalClienteAsync(clienteId);
+    }
 }

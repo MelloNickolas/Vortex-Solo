@@ -1,5 +1,7 @@
-namespace Projeto.Domain.DTOs;
+namespace Projeto.Repository.FuncoesSQL;
 
+// STORED PROCEDURE sp_ProdutosMaisVendidos
+// Retorna os N produtos com maior quantidade vendida em vendas concluidas.
 public class ProdutoMaisVendidoResponse
 {
     public string Produto { get; set; } = string.Empty;

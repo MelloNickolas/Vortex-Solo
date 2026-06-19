@@ -1,5 +1,7 @@
-namespace Projeto.Domain.DTOs;
+namespace Projeto.Repository.FuncoesSQL;
 
+// VIEW vw_ProdutosAbaixoMinimo
+// Lista os produtos com EstoqueAtual abaixo do EstoqueMinimo definido no cadastro.
 public class ProdutoAbaixoMinimoResponse
 {
     public int ID { get; set; }

@@ -8,7 +8,7 @@ public class MovimentacaoRequest
     public int UsuarioID { get; set; }
     public TipoMovimentacao Tipo { get; set; }
 
-    // Apenas motivos manuais são permitidos — Venda e CancelamentoVenda são gerados automaticamente
+    // Apenas motivos manuais são permitidos, Venda e CancelamentoVenda são gerados automaticamente
     public MotivoMovimentacao Motivo { get; set; }
 
     public int Quantidade { get; set; }

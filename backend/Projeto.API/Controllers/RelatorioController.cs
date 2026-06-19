@@ -16,19 +16,44 @@ public class RelatorioController : ControllerBase
         _relatorioApplication = relatorioApplication;
     }
 
+    // Retorna os dados da VIEW vw_ResumoVendas
     [HttpGet("resumo")]
     public async Task<IActionResult> Resumo()
-        => Ok(await _relatorioApplication.BuscarResumoAsync());
+    {
+        var resultado = await _relatorioApplication.BuscarResumoAsync();
+        return Ok(resultado);
+    }
 
+    // Retorna os dados da VIEW vw_ProdutosAbaixoMinimo
     [HttpGet("produtos-abaixo-minimo")]
     public async Task<IActionResult> ProdutosAbaixoMinimo()
-        => Ok(await _relatorioApplication.ListarProdutosAbaixoMinimoAsync());
+    {
+        var resultado = await _relatorioApplication.ListarProdutosAbaixoMinimoAsync();
+        return Ok(resultado);
+    }
 
+    // Retorna os dados da VIEW vw_VendasPorFormaPagamento
     [HttpGet("formas-pagamento")]
     public async Task<IActionResult> FormasPagamento()
-        => Ok(await _relatorioApplication.ListarVendasPorFormaPagamentoAsync());
+    {
+        var resultado = await _relatorioApplication.ListarVendasPorFormaPagamentoAsync();
+        return Ok(resultado);
+    }
 
+    // Executa a SP sp_ProdutosMaisVendidos com o parâmetro top
     [HttpGet("produtos-mais-vendidos")]
     public async Task<IActionResult> ProdutosMaisVendidos([FromQuery] int top = 10)
-        => Ok(await _relatorioApplication.ListarProdutosMaisVendidosAsync(top));
+    {
+        var resultado = await _relatorioApplication.ListarProdutosMaisVendidosAsync(top);
+        return Ok(resultado);
+    }
+
+    // Executa a FUNCTION fn_TotalVendasCliente(@ClienteID)
+    // Retorna: { "total": 1234.56 }
+    [HttpGet("total-cliente/{clienteId}")]
+    public async Task<IActionResult> TotalCliente(int clienteId)
+    {
+        var total = await _relatorioApplication.ConsultarTotalClienteAsync(clienteId);
+        return Ok(new { total });
+    }
 }

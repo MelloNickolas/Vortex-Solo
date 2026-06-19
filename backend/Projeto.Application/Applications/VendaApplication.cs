@@ -31,40 +31,18 @@ public class VendaApplication : IVendaApplication
         _movimentacaoRepository = movimentacaoRepository;
     }
 
-    public async Task<PagedResponse<VendaResponse>> ListarPagedAsync(int page, int pageSize, string? status, DateTime? de, DateTime? ate)
+    public async Task<PagedResponse<VendaResponse>> ListarPagedAsync(int page, int pageSize, string? status)
     {
         try
         {
-            // Converte a string do filtro para o enum
-            /*
-            Tenta converter uma string para um enum. Retorna true se conseguiu, false se não conseguiu
-            
-            É como ligar para o banco perguntando se um cheque é válido. O atendente te responde duas coisas ao mesmo tempo:
-
-            Retorno: "Sim, é válido" (true) ou "Não, é inválido" (false)
-            out: "O valor do cheque é R$ 500" (parsed = StatusVenda.Concluida)
-            Se o cheque for inválido, ele responde false e você ignora o valor — o out existiu mas você não usa.
-            
-            
-            
-            StatusVenda? statusEnum = null; // começa sem filtro
-
-            if (!string.IsNullOrWhiteSpace(status)              // 1. veio alguma string?
-                && Enum.TryParse<StatusVenda>(status, out var parsed)) // 2. é um status válido?
-                statusEnum = parsed;                            // 3. só aí aplica o filtro
-
-            Exemplos:
-            status = null       → statusEnum = null     → lista todas as vendas
-            status = "Concluida"→ statusEnum = Concluida → filtra só concluídas
-            status = "Qualquer" → statusEnum = null     → string inválida, ignora    
-            
-            */
-            
+            // o front vai mandar na url como Concluida, ano da para comparar a  string diretamente com enum
+            // se o filtro nao foi passado segue como null, porem se for, vai temtar converter o concluida para o enum de Status venda
+            // se a string nao bater com o valor do enum, ele vai retornar ffalse, e esse parsed é onde vai parar se o resultado der certo
             StatusVenda? statusEnum = null;
             if (!string.IsNullOrWhiteSpace(status) && Enum.TryParse<StatusVenda>(status, out var parsed))
                 statusEnum = parsed;
 
-            var (items, total) = await _vendaRepository.GetPagedAsync(page, pageSize, statusEnum, de, ate);
+            var (items, total) = await _vendaRepository.GetPagedAsync(page, pageSize, statusEnum);
 
             return new PagedResponse<VendaResponse>
             {
@@ -115,7 +93,7 @@ public class VendaApplication : IVendaApplication
                 throw new NotFoundException("Usuário não encontrado.");
 
 
-            // Valida estoque e monta os itens — dois passos em um só loop
+            // Valida estoque e monta os itens, dois passos em um só loop
             var itens = new List<ItemVenda>();
             decimal valorTotal = 0;
 
@@ -272,7 +250,7 @@ public class VendaApplication : IVendaApplication
         ClienteID = venda.ClienteID,
         ClienteNome = venda.Cliente?.Nome ?? string.Empty,
         UsuarioID = venda.UsuarioID,
-        UsuarioNome = venda.Usuario?.Nome ?? string.Empty,
+        UsuarioNome = venda.Usuario?.Nome ?? string.Empty, // se o usuario nao for null, pega o nome dele
         Itens = venda.Itens?.Select(i => new ItemVendaResponse // se itens for nulo nem tenta dar o select
         {
             ID = i.ID,

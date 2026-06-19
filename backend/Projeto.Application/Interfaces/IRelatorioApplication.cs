@@ -1,4 +1,4 @@
-using Projeto.Domain.DTOs;
+using Projeto.Repository.FuncoesSQL;
 
 namespace Projeto.Application.Interfaces;
 
@@ -8,4 +8,7 @@ public interface IRelatorioApplication
     Task<List<ProdutoAbaixoMinimoResponse>> ListarProdutosAbaixoMinimoAsync();
     Task<List<VendaPorFormaPagamentoResponse>> ListarVendasPorFormaPagamentoAsync();
     Task<List<ProdutoMaisVendidoResponse>> ListarProdutosMaisVendidosAsync(int top = 10);
+    Task<decimal> ConsultarTotalClienteAsync(int clienteId);
 }
+
+

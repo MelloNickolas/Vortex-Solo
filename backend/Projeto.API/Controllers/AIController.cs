@@ -5,8 +5,8 @@ using Projeto.Application.Interfaces;
 namespace Projeto.API.Controllers;
 
 [ApiController]
-[Authorize]
-[Route("api/[controller]")]
+[Authorize] 
+[Route("api/[controller]")] 
 public class AIController : ControllerBase
 {
     private readonly IAIApplication _aiApplication;
@@ -20,7 +20,7 @@ public class AIController : ControllerBase
     public async Task<IActionResult> AnalisarVendas()
     {
         var resposta = await _aiApplication.AnalisarVendasAsync();
-        return Ok(new { resposta });
+        return Ok(new { resposta }); // isso pq o front acessa com data.resposta, e fica mais organizado
     }
 
     [HttpPost("analisar-estoque")]

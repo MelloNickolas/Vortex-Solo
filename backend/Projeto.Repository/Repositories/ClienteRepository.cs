@@ -19,7 +19,7 @@ public class ClienteRepository : BaseRepository, IClienteRepository
                 .ThenInclude(ci => ci.Estado)
             .AsQueryable(); // ele basicamente ffaza voce aceitar WHERE e ORDERBY depois de buscar.
 
-        // Filtro unificado, busca por nome OU CPF
+        // Filtro busca por nome OU CPF
         if (!string.IsNullOrWhiteSpace(busca))
             query = query.Where(c =>
                 c.Nome.ToLower().Contains(busca.ToLower()) ||

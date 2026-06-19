@@ -8,26 +8,21 @@ namespace Projeto.Repository.Repositories;
 
 public class VendaRepository : BaseRepository, IVendaRepository
 {
+
     public VendaRepository(AppDbContext context) : base(context) { }
 
     public async Task<(IEnumerable<Venda> Items, int Total)> GetPagedAsync(
-        int page, int pageSize, StatusVenda? status, DateTime? de, DateTime? ate)
+        int page, int pageSize, StatusVenda? status)
     {
         var query = _context.Vendas
-            .Include(v => v.Cliente)
-            .Include(v => v.Usuario)
-            .Include(v => v.Itens)
-                .ThenInclude(i => i.Produto)
+            .Include(v => v.Cliente) // carrega o cliente
+            .Include(v => v.Usuario) // carrega que registra a venda
+            .Include(v => v.Itens) // carrega os itens da venda
+                .ThenInclude(i => i.Produto) // carrega o produto da ItensVenda
             .AsQueryable();
 
         if (status.HasValue)
             query = query.Where(v => v.Status == status.Value);
-
-        if (de.HasValue)
-            query = query.Where(v => v.DataVenda >= de.Value);
-
-        if (ate.HasValue)
-            query = query.Where(v => v.DataVenda <= ate.Value);
 
         var total = await query.CountAsync();
 
@@ -37,8 +32,10 @@ public class VendaRepository : BaseRepository, IVendaRepository
             .Take(pageSize)
             .ToListAsync();
 
+
         return (items, total);
     }
+
 
     public async Task<Venda?> GetByIdAsync(int id)
     {
@@ -52,15 +49,14 @@ public class VendaRepository : BaseRepository, IVendaRepository
 
     public async Task<Venda> AddAsync(Venda venda)
     {
-        await _context.Vendas.AddAsync(venda);
-        await _context.SaveChangesAsync();
-        return venda;
+        await _context.Vendas.AddAsync(venda); 
+        await _context.SaveChangesAsync();     
+        return venda;                         
     }
 
-    // Utilizado para cancelamento — a lógica de reversão de estoque fica na camada Application
     public async Task UpdateAsync(Venda venda)
     {
-        _context.Vendas.Update(venda);
-        await _context.SaveChangesAsync();
+        _context.Vendas.Update(venda);     
+        await _context.SaveChangesAsync(); 
     }
 }

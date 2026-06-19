@@ -1,7 +1,7 @@
 import styles from './Pagination.module.css';
 
-// page (página atual), totalPages (total de páginas), onPageChange (função chamada ao mudar)
-function Pagination({ page, totalPages, onPageChange }) {
+
+function Pagination({ page, totalPages, onPageChange /* funcao que faz trocar de pagina */}) {
   // Se só tem 1 página, nao mostra nada
   if (totalPages <= 1) return null;
 
