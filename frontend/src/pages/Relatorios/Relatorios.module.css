@@ -16,6 +16,23 @@
   margin-bottom: 16px;
 }
 
+/* header da seção: título de um lado, botão de IA do outro */
+.secaoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.secaoHeader .secaoTitulo {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 .fonte {
   font-weight: 400;
   color: var(--text-muted);
@@ -127,6 +144,11 @@
 .funcaoResultado {
   font-size: 14px;
   color: var(--text-primary);
+}
+
+/* ── IA inline (dentro de cada seção) ── */
+.iaInline {
+  margin-top: 12px;
 }
 
 /* ── IA ── */
