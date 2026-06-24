@@ -1,0 +1,90 @@
+.carregando {
+  color: var(--text-muted);
+  margin-top: 32px;
+}
+
+/* ── Gráfico ── */
+.grafico {
+  border: 1px solid var(--border);
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.graficoTitulo {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 20px 0;
+}
+
+/* header do gráfico: título de um lado, filtro de mês do outro */
+.graficoHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.graficoHeader .graficoTitulo {
+  margin: 0;
+}
+
+.filtroMes {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+/* deixa o ícone do calendário branco */
+.filtroMes::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.vazio {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ── Cards ── */
+.cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid var(--border);
+  padding: 16px 20px;
+  min-width: 160px;
+  flex: 1;
+}
+
+.cardLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.cardValor {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cardValorVerde {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.cardValorVermelho {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--danger);
+}

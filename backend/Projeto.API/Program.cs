@@ -27,6 +27,7 @@ builder.Services.AddScoped<IAuthApplication, AuthApplication>();
 builder.Services.AddScoped<IVendaApplication, VendaApplication>();
 builder.Services.AddScoped<IMovimentacaoApplication, MovimentacaoApplication>();
 builder.Services.AddScoped<IRelatorioApplication, RelatorioApplication>();
+builder.Services.AddScoped<IDashboardApplication, DashboardApplication>();
 builder.Services.AddScoped<IAIApplication, AIApplication>();
 
 // Repositories
@@ -39,6 +40,7 @@ builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IVendaRepository, VendaRepository>();
 builder.Services.AddScoped<IMovimentacaoEstoqueRepository, MovimentacaoEstoqueRepository>();
 builder.Services.AddScoped<IRelatorioRepository, RelatorioRepository>();
+builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 
 //Services
 builder.Services.AddScoped<IJwtService, JwtService>();

@@ -40,7 +40,7 @@ function Login() {
       localStorage.setItem('usuarioId', data.usuarioID);
 
       // Redireciona para o dashboard após login bem-sucedido
-      navigate('/relatorios');
+      navigate('/dashboard');
     } catch (error) {
       setMensagem(error.response?.data?.mensagem || 'Erro ao fazer login.');
     }

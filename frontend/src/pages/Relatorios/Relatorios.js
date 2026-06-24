@@ -117,19 +117,38 @@ function Relatorios() {
     return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
+  // bloco do texto da análise da IA, reaproveitado em todas as seções
+  function blocoResposta(texto) {
+    if (!texto) return null;
+    return (
+      <div className={styles.iaResposta}>
+        <div className={styles.iaRespostaLabel}>✦ Análise da IA</div>
+        {texto}
+      </div>
+    );
+  }
+
   return (
     <div>
-      <h1 className="page-title">Relatórios com IA</h1>
+      <h1 className="page-title">Relatórios Inteligentes</h1>
 
       {/* Resumo de vendas — VIEW: vw_ResumoVendas */}
       <section className={styles.secao}>
         <div className={styles.secaoHeader}>
-          <h2 className={styles.secaoTitulo}>Resumo Geral — vw_ResumoVendas</h2>
+          <div>
+            <h2 className={styles.secaoNome}>Desempenho de Vendas</h2>
+            <p className={styles.secaoDesc}>
+              A IA analisa o faturamento total, ticket médio e a proporção de vendas concluídas
+              x canceladas, gerando insights sobre a saúde financeira do negócio.
+            </p>
+          </div>
           <button className={styles.iaBotao} onClick={handleAnalisarVendas} disabled={carregando === 'vendas'}>
             {carregando === 'vendas' ? 'Analisando...' : 'Analisar com IA'}
           </button>
         </div>
-        {resumo && (
+        {!resumo ? (
+          <div className={styles.placeholder}>Clique em "Analisar com IA" para gerar este relatório.</div>
+        ) : (
           <>
             <div className={styles.cards}>
               <div className={styles.card}>
@@ -153,7 +172,7 @@ function Relatorios() {
                 <div className={styles.cardValorVermelho}>{resumo.vendasCanceladas ?? 0}</div>
               </div>
             </div>
-            {respostaVendas && <p className={styles.iaResposta}>{respostaVendas}</p>}
+            {blocoResposta(respostaVendas)}
           </>
         )}
       </section>
@@ -161,12 +180,20 @@ function Relatorios() {
       {/* Top 10 produtos — SP: sp_ProdutosMaisVendidos */}
       <section className={styles.secao}>
         <div className={styles.secaoHeader}>
-          <h2 className={styles.secaoTitulo}>Top 10 Produtos Mais Vendidos — sp_ProdutosMaisVendidos</h2>
+          <div>
+            <h2 className={styles.secaoNome}>Produtos Mais Vendidos</h2>
+            <p className={styles.secaoDesc}>
+              A IA examina o ranking dos 10 produtos com maior volume de vendas e identifica
+              padrões de categoria, destaques e recomendações estratégicas para o mix de produtos.
+            </p>
+          </div>
           <button className={styles.iaBotao} onClick={handleAnalisarProdutos} disabled={carregando === 'produtos'}>
             {carregando === 'produtos' ? 'Analisando...' : 'Analisar com IA'}
           </button>
         </div>
-        {maisVendidos && (
+        {!maisVendidos ? (
+          <div className={styles.placeholder}>Clique em "Analisar com IA" para gerar este relatório.</div>
+        ) : (
           <>
             {maisVendidos.length === 0 ? (
               <p className={styles.vazio}>Nenhum dado encontrado.</p>
@@ -194,7 +221,7 @@ function Relatorios() {
                 </tbody>
               </table>
             )}
-            {respostaProdutos && <p className={styles.iaResposta}>{respostaProdutos}</p>}
+            {blocoResposta(respostaProdutos)}
           </>
         )}
       </section>
@@ -202,12 +229,20 @@ function Relatorios() {
       {/* Formas de pagamento — VIEW: vw_VendasPorFormaPagamento */}
       <section className={styles.secao}>
         <div className={styles.secaoHeader}>
-          <h2 className={styles.secaoTitulo}>Vendas por Forma de Pagamento — vw_VendasPorFormaPagamento</h2>
+          <div>
+            <h2 className={styles.secaoNome}>Formas de Pagamento</h2>
+            <p className={styles.secaoDesc}>
+              A IA analisa como os clientes preferem pagar, destacando a forma mais utilizada,
+              o total movimentado por cada uma e recomendações sobre o comportamento de pagamento.
+            </p>
+          </div>
           <button className={styles.iaBotao} onClick={handleAnalisarFormasPagamento} disabled={carregando === 'formas'}>
             {carregando === 'formas' ? 'Analisando...' : 'Analisar com IA'}
           </button>
         </div>
-        {formasPagamento && (
+        {!formasPagamento ? (
+          <div className={styles.placeholder}>Clique em "Analisar com IA" para gerar este relatório.</div>
+        ) : (
           <>
             {formasPagamento.length === 0 ? (
               <p className={styles.vazio}>Nenhum dado encontrado.</p>
@@ -231,7 +266,7 @@ function Relatorios() {
                 </tbody>
               </table>
             )}
-            {respostaFormasPagamento && <p className={styles.iaResposta}>{respostaFormasPagamento}</p>}
+            {blocoResposta(respostaFormasPagamento)}
           </>
         )}
       </section>
@@ -239,12 +274,20 @@ function Relatorios() {
       {/* Estoque crítico — VIEW: vw_ProdutosAbaixoMinimo */}
       <section className={styles.secao}>
         <div className={styles.secaoHeader}>
-          <h2 className={styles.secaoTitulo}>Estoque Crítico — vw_ProdutosAbaixoMinimo</h2>
+          <div>
+            <h2 className={styles.secaoNome}>Estoque Crítico</h2>
+            <p className={styles.secaoDesc}>
+              A IA verifica quais produtos estão abaixo do estoque mínimo e gera recomendações
+              práticas de reposição, priorizando os itens com maior déficit.
+            </p>
+          </div>
           <button className={styles.iaBotao} onClick={handleAnalisarEstoque} disabled={carregando === 'estoque'}>
             {carregando === 'estoque' ? 'Analisando...' : 'Analisar com IA'}
           </button>
         </div>
-        {abaixoMinimo && (
+        {!abaixoMinimo ? (
+          <div className={styles.placeholder}>Clique em "Analisar com IA" para gerar este relatório.</div>
+        ) : (
           <>
             {abaixoMinimo.length === 0 ? (
               <p className={styles.vazio}>Nenhum produto abaixo do estoque mínimo.</p>
@@ -272,14 +315,22 @@ function Relatorios() {
                 </tbody>
               </table>
             )}
-            {respostaEstoque && <p className={styles.iaResposta}>{respostaEstoque}</p>}
+            {blocoResposta(respostaEstoque)}
           </>
         )}
       </section>
 
       {/* Total por cliente — FUNCTION: fn_TotalVendasCliente */}
       <section className={styles.secao}>
-        <h2 className={styles.secaoTitulo}>Total por Cliente — fn_TotalVendasCliente</h2>
+        <div className={styles.secaoHeader}>
+          <div>
+            <h2 className={styles.secaoNome}>Perfil de Cliente</h2>
+            <p className={styles.secaoDesc}>
+              Selecione um cliente e a IA analisa o total já comprado por ele, classificando
+              o perfil e sugerindo uma ação comercial personalizada.
+            </p>
+          </div>
+        </div>
         <div className={styles.funcaoBloco}>
           <SelectBusca
             placeholder="Selecione um cliente..."
@@ -300,7 +351,7 @@ function Relatorios() {
             <p className={styles.funcaoResultado}>
               Total faturado: <strong>{formatarMoeda(totalCliente)}</strong>
             </p>
-            {respostaCliente && <p className={styles.iaResposta}>{respostaCliente}</p>}
+            {blocoResposta(respostaCliente)}
           </>
         )}
       </section>
